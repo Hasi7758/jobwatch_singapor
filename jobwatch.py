@@ -930,9 +930,11 @@ def classify(job, company_tags=None):
             continue
         for n in needles:
             n = n.strip()
-            if len(n) < 4:
+            if len(n) < 3:
                 continue
-            if n in comp or (n in GENERIC_OK and n in title):
+            # 短品牌名要求词边界,避免 "amd" 命中 "amdocs"
+            hit_comp = (f" {n} " in comp or comp.strip() == n) if len(n) <= 4 else (n in comp)
+            if hit_comp or (n in GENERIC_OK and n in title):
                 tags.append(cat)
                 break
     return tags
