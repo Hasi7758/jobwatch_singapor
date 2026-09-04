@@ -110,3 +110,15 @@ companies:
   search: Singapore
   tags:
   - 航空与MRO
+- name: AMD
+  ats: phenom
+  url: https://careers.amd.com
+  location: Singapore
+  tags:
+  - 半导体与精密制造
+- name: Keysight
+  ats: phenom
+  url: https://careers.keysight.com
+  location: Singapore
+  tags:
+  - 半导体与精密制造

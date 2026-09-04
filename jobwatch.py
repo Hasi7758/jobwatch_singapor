@@ -641,6 +641,51 @@ def ats_hr4you(cfg_entry, name):
 
 
 
+
+def ats_phenom(cfg_entry, name):
+    """
+    Phenom People 平台(AMD / Keysight / 多数大型制造企业用)。
+    /api/jobs 是公开 JSON,支持 location 过滤,返回精确到分钟的发布时间。
+    """
+    host = cfg_entry["url"].rstrip("/")
+    loc = cfg_entry.get("location", "Singapore")
+    jobs, page = [], 1
+    while page <= 10:
+        try:
+            r = session.get(host + "/api/jobs",
+                            params={"location": loc, "limit": 100, "page": page},
+                            headers={"Accept": "application/json"}, timeout=25)
+            if r.status_code != 200:
+                break
+            items = (r.json() or {}).get("jobs") or []
+        except Exception as e:
+            print(f"  [Phenom:{name}] {type(e).__name__}")
+            break
+        if not items:
+            break
+        for it in items:
+            d = it.get("data") or it
+            jid = d.get("slug") or d.get("req_id")
+            if not jid:
+                continue
+            city = d.get("city") or d.get("location_name") or d.get("state") or ""
+            country = d.get("country") or ""
+            jobs.append(Job(
+                uid=f"phenom:{name}:{jid}",
+                source="Phenom",
+                company=name,
+                title=d.get("title") or "-",
+                location=" ".join(str(x) for x in [city, country] if x) or loc,
+                url=d.get("apply_url") or f"{host}/careers/job/{jid}",
+                posted=str(d.get("posted_date") or d.get("create_date") or "")[:10],
+            ))
+        if len(items) < 100:
+            break
+        page += 1
+        time.sleep(0.3)
+    return jobs
+
+
 def ats_softgarden(slug, name):
     """softgarden:德国中小企业常用。"""
     r = _get(f"https://{slug}.softgarden.io/api/rest/frontend/v3/job-postings",
@@ -715,6 +760,8 @@ def fetch_companies():
                 out += ats_successfactors(c, name)
             elif ats == "bmw":
                 out += ats_bmw(c, name)
+            elif ats == "phenom":
+                out += ats_phenom(c, name)
             elif ats == "hr4you":
                 out += ats_hr4you(c, name)
             elif ats in ATS_FETCHERS:
