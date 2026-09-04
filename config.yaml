@@ -1,0 +1,101 @@
+# ============================================================
+#  新加坡职位监控配置
+# ============================================================
+
+# ---------- 关键词(与德国版一致:产品 / 项目管理 / Manager)----------
+keywords:
+  include:
+    - product owner
+    - productowner
+    - product manager
+    - product lead
+    - project lead
+    - project manag        # Project Manager / Project Management
+    - projectmanager
+    - programme manager
+    - program manager
+    - programmanager
+    - delivery manager
+    - scrum master
+    - manager
+    - managerin
+
+  exclude:
+    # —— 入门级:要有经验的岗位 ——
+    - intern (
+    - " intern "
+    - internship
+    - trainee
+    - fresh grad
+    - graduate programme
+    - graduate program
+    - apprentice
+    - student
+    - junior
+    - entry level
+    - part-time
+    - part time
+    # —— manager 收窄:营销 / HR / 销售 / 行政不要 ——
+    - marketing
+    - campaign
+    - seo
+    - social media
+    - content manager
+    - brand manager
+    - growth manager
+    - account manager
+    - key account
+    - sales
+    - business development manager
+    - customer success
+    - partner manager
+    - community manager
+    - talent acquisition
+    - recruiting
+    - recruiter
+    - payroll
+    - office manager
+    - facility manager
+    - tax manager
+    - billing manager
+    - relationship manager   # 新加坡银行业大量此类销售岗
+    - wealth manager
+    - insurance
+    - property agent
+    - real estate
+
+# ---------- 地点:整个新加坡 ----------
+location:
+  terms: ["singapore", "sg", "singapura"]
+  allow_remote: true
+  plz_prefixes: []
+
+# ---------- MyCareersFuture 官方接口 ----------
+mycareersfuture:
+  enabled: true
+  pages: 5          # 每页100条
+  # 每个关键词单独搜一次,比拉全量再过滤命中率高得多
+  queries:
+    - "product manager"
+    - "product owner"
+    - "project manager"
+    - "programme manager"
+    - "delivery manager"
+    - "scrum master"
+
+# ---------- 数据清洗 ----------
+filters:
+  max_posted_age_days: 365
+
+# ---------- 页面显示 ----------
+display:
+  max_age_days: 5
+  recent_days: 2
+
+# ---------- 推送(可选)----------
+telegram:
+  enabled: false
+  bot_token: ""
+  chat_id: ""
+
+open_browser: true
