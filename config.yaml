@@ -5,20 +5,37 @@
 # ---------- 关键词(与德国版一致:产品 / 项目管理 / Manager)----------
 keywords:
   include:
-    - product owner
-    - productowner
-    - product manager
-    - product lead
-    - project lead
-    - project manag        # Project Manager / Project Management
-    - projectmanager
-    - programme manager
+    # —— 工程管理(你现在的层级)——
+    - engineering manager
+    - development manager
+    - software development manager
+    - r&d manager
+    - head of engineering
+    - engineering lead
+    - technical lead
+    - tech lead
+    # —— 技术项目/项目群管理(新加坡制造业最常见的抬头)——
+    - technical program manager
+    - technical project manager
+    - engineering program manager
+    - engineering project manager
     - program manager
-    - programmanager
-    - delivery manager
+    - programme manager
+    - project manager
+    - project lead
+    - npi                  # New Product Introduction,新加坡制造业高频词
+    - new product introduction
+    - platform manager
+    # —— 产品(Rodenstock/Schaeffler 的 PO 经历)——
+    - product owner
+    - product manager
+    - technical product manager
+    - product lead
+    # —— 敏捷 ——
     - scrum master
+    - agile coach
+    - delivery manager
     - manager
-    - managerin
 
   exclude:
     # —— 入门级:要有经验的岗位 ——

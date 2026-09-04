@@ -1,32 +1,54 @@
 # 新加坡公司直连招聘接口(实测可用)
 companies:
-  - name: GovTech Singapore
-    ats: greenhouse
-    slug: govtech
-  - name: Ninja Van
-    ats: lever
-    slug: ninjavan
-  - name: Nium
-    ats: lever
-    slug: nium
-  - name: Grab
-    ats: smartrecruiters
-    slug: grab
-  - name: Stripe
-    ats: greenhouse
-    slug: stripe
-  - name: Thoughtworks
-    ats: greenhouse
-    slug: thoughtworks
-  - name: Xendit
-    ats: greenhouse
-    slug: xendit
-  - name: ByteDance
-    ats: smartrecruiters
-    slug: bytedance
-
-# 加公司的办法:打开公司招聘页,点一个职位看跳转域名
-#   boards.greenhouse.io/X   -> {ats: greenhouse, slug: X}
-#   jobs.lever.co/X          -> {ats: lever, slug: X}
-#   jobs.ashbyhq.com/X       -> {ats: ashby, slug: X}
-#   jobs.smartrecruiters.com/X -> {ats: smartrecruiters, slug: X}
+- name: GovTech Singapore
+  ats: greenhouse
+  slug: govtech
+- name: Ninja Van
+  ats: lever
+  slug: ninjavan
+- name: Nium
+  ats: lever
+  slug: nium
+- name: Grab
+  ats: smartrecruiters
+  slug: grab
+- name: Stripe
+  ats: greenhouse
+  slug: stripe
+- name: Thoughtworks
+  ats: greenhouse
+  slug: thoughtworks
+- name: Xendit
+  ats: greenhouse
+  slug: xendit
+- name: ByteDance
+  ats: smartrecruiters
+  slug: bytedance
+- name: Micron
+  ats: workday
+  url: https://micron.wd1.myworkdayjobs.com/wday/cxs/micron/External/jobs
+  search: Singapore
+- name: GlobalFoundries
+  ats: workday
+  url: https://globalfoundries.wd1.myworkdayjobs.com/wday/cxs/globalfoundries/External/jobs
+  search: Singapore
+- name: Applied Materials
+  ats: workday
+  url: https://amat.wd1.myworkdayjobs.com/wday/cxs/amat/External/jobs
+  search: Singapore
+- name: Medtronic
+  ats: workday
+  url: https://medtronic.wd1.myworkdayjobs.com/wday/cxs/medtronic/MedtronicCareers/jobs
+  search: Singapore
+- name: EssilorLuxottica
+  ats: smartrecruiters
+  slug: essilorluxottica
+- name: Continental
+  ats: smartrecruiters
+  slug: continental
+- name: SHEIN
+  ats: greenhouse
+  slug: shein
+- name: GitLab
+  ats: greenhouse
+  slug: gitlab
