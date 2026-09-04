@@ -911,16 +911,30 @@ CATEGORY_RULES = [
 ]
 
 
+# 只在公司名里匹配的词(品牌名);行业通名才允许在职位名里匹配
+GENERIC_OK = {
+    "semiconductor", "wafer", "photonics", "advanced packaging", "foundry",
+    "aerospace", "aviation", "mro", "aircraft", "airframe", "turbine",
+    "medical device", "medtech", "ophthalmic", "diagnostics",
+    "renewable", "hydrogen", "decarbon",
+}
+
+
 def classify(job, company_tags=None):
-    """返回该职位的标签列表。公司在直连清单里的用预设标签,
-    其余(如 MyCareersFuture 来的)按公司名+职位名关键词判断。"""
+    """公司在直连清单里的用预设标签;其余按公司名(品牌词)+职位名(行业通名)判断。"""
     tags = list(company_tags or [])
-    hay = f"{job.company} {job.title}".lower()
+    comp = f" {job.company.lower()} "
+    title = f" {job.title.lower()} "
     for cat, needles in CATEGORY_RULES:
         if cat in tags:
             continue
-        if any(n in hay for n in needles):
-            tags.append(cat)
+        for n in needles:
+            n = n.strip()
+            if len(n) < 4:
+                continue
+            if n in comp or (n in GENERIC_OK and n in title):
+                tags.append(cat)
+                break
     return tags
 
 
@@ -956,10 +970,13 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
     maxage = int(disp.get("max_age_days", 5))
     allj = fallback or []
 
-    fresh, older = [], []
+    PRIORITY = {"半导体与精密制造", "航空与MRO", "医疗器械与光学", "德企(非汽车)"}
+    fresh, older, prio_all = [], [], []
     for j in allj:
         n, _ = job_age_days(j)
         (fresh if (n is not None and n <= maxage) else older).append(j)
+        if PRIORITY & set(j.extra.get("cats") or []):
+            prio_all.append(j)
 
     def by_age(js):
         return sorted(js, key=lambda x: (0 if x.extra.get("igm") else 1,
@@ -992,6 +1009,11 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
         parts.append(f'<div class=note>最近 {maxage} 天没有新职位(周末常见)。'
                      f'下面列出最新的一批供参考。</div>')
         parts += cards(older[:25])
+
+    if prio_all:
+        parts.append(f"<div class=sec>重点方向全部在招 · {len(prio_all)} 条"
+                     f"<span class=hint>(半导体 / 航空MRO / 医疗光学 / 德企非汽车,不限日期)</span></div>")
+        parts += cards(prio_all[:200])
 
     if fresh and older:
         parts.append(f'<div class=sec2>更早的职位 · {len(older)} 条'
