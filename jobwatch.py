@@ -821,10 +821,17 @@ CATEGORY_RULES = [
     ("半导体与精密制造", [
         "micron", "globalfoundries", "global foundries", "applied materials", "kla",
         "lam research", "asml", "amd", "intel", "tsmc", "umc", "infineon", "stmicro",
-        "western digital", "seagate", "siltronic", "soitec", "ase ", "amkor",
-        "kulicke", "ultra clean", "entegris", "onto innovation", "nanofilm",
-        "semiconductor", "wafer", "fab ", "photonics", "precision engineering",
-        "advanced micro", "murata", "tdk", "jabil", "flex ", "venture corp",
+        "western digital", "seagate", "siltronic", "soitec", "amkor", "kulicke",
+        "ultra clean", "entegris", "onto innovation", "nanofilm", "semiconductor",
+        "wafer", "photonics", "precision engineering", "advanced micro", "murata",
+        "tdk", "jabil", "venture corp", "advanced packaging", "hbm", "foundry",
+    ]),
+    ("航空与MRO", [
+        "st engineering", "st engg", "singapore technologies", "rolls-royce", "rolls royce",
+        "pratt & whitney", "pratt and whitney", "collins aerospace", "raytheon", "rtx",
+        "safran", "thales", "honeywell aerospace", "gkn aerospace", "sia engineering",
+        "singapore airlines", "airbus", "boeing", "eagle services", "jamco",
+        "aerospace", "aviation", "mro", "aircraft", "airframe", "turbine", "engine overhaul",
     ]),
     ("医疗器械与光学", [
         "medtronic", "essilor", "luxottica", "alcon", "hoya", "zeiss", "carl zeiss",
@@ -832,31 +839,27 @@ CATEGORY_RULES = [
         "boston scientific", "siemens healthineers", "healthineers", "philips",
         "b. braun", "fresenius", "dentsply", "coloplast", "smith & nephew",
         "medical device", "medtech", "ophthalmic", "optical", "lens",
-        "in-vitro", "diagnostics", "biosensor", "thermo fisher", "agilent",
+        "diagnostics", "biosensor", "thermo fisher", "agilent", "roche",
     ]),
-    ("德企亚太总部", [
-        "siemens", "bosch", "continental", "zf ", "schaeffler", "thyssenkrupp",
-        "tuv sud", "tüv süd", "tuv rheinland", "rohde", "festo", "sick ag", "beckhoff",
-        "trumpf", "sap ", "basf", "bayer", "merck", "henkel", "linde",
-        "zeiss", "knorr-bremse", "man ", "daimler", "mercedes", "bmw", "volkswagen",
-        "audi", "porsche", "lufthansa", "dhl", "deutsche", "german",
-        "wacker", "evonik", "covestro", "brose", "mahle", "hella", "webasto",
+    ("德企(非汽车)", [
+        "siemens", "zeiss", "tuv sud", "tüv süd", "tuv rheinland", "rohde", "festo",
+        "sick ag", "beckhoff", "trumpf", "sap ", "basf", "bayer", "merck kgaa",
+        "henkel", "linde", "evonik", "covestro", "wacker", "lufthansa", "dhl",
+        "siemens energy", "knorr-bremse",
     ]),
-    ("中资出海", [
-        "bytedance", "tiktok", "shein", "temu", "pdd", "alibaba", "lazada", "ant group",
-        "tencent", "huawei", "xiaomi", "byd", "nio", "xpeng", "li auto", "catl",
-        "haier", "midea", "hisense", "goertek", "luxshare", "wingtech", "sunwoda",
-        "china ", "sinopec", "cosco", "shopee", "sea limited",
-    ]),
-    ("航空与国防", [
-        "st engineering", "rolls-royce", "rolls royce", "pratt & whitney", "collins aerospace",
-        "airbus", "boeing", "safran", "thales", "honeywell aerospace", "gkn",
-        "singapore technologies", "sia engineering", "aerospace", "mro ",
+    ("⚠德国汽车供应链", [
+        "bosch", "continental", "zf friedrichshafen", "zf group", "schaeffler",
+        "webasto", "mahle", "hella", "brose", "vitesco", "thyssenkrupp automotive",
+        "daimler", "mercedes", "bmw", "volkswagen", "audi", "porsche", "aumovio",
     ]),
     ("能源与可持续", [
-        "shell", "exxonmobil", "keppel", "sembcorp", "vestas", "siemens energy",
-        "schneider electric", "abb ", "sunseap", "energy", "sustainability",
-        "decarbon", "renewable", "hydrogen", "battery",
+        "shell", "exxonmobil", "keppel", "sembcorp", "vestas", "schneider electric",
+        "abb ", "sunseap", "decarbon", "renewable", "hydrogen", "energy storage",
+    ]),
+    ("中资出海", [
+        "bytedance", "tiktok", "shein", "temu", "alibaba", "lazada", "ant group",
+        "tencent", "huawei", "xiaomi", "byd", "nio", "xpeng", "catl",
+        "haier", "midea", "goertek", "luxshare", "shopee", "sea limited",
     ]),
 ]
 
@@ -876,12 +879,13 @@ def classify(job, company_tags=None):
 
 TAG_COLORS = {
     "半导体与精密制造": "#1d4ed8",
+    "航空与MRO": "#4338ca",
     "医疗器械与光学": "#047857",
-    "德企亚太总部": "#b45309",
-    "中资出海": "#b91c1c",
-    "航空与国防": "#4338ca",
+    "德企(非汽车)": "#b45309",
     "能源与可持续": "#0f766e",
     "科技与平台": "#6b7280",
+    "中资出海": "#9333ea",
+    "⚠德国汽车供应链": "#9ca3af",
 }
 
 

@@ -93,12 +93,17 @@ mycareersfuture:
   pages: 5          # 每页100条
   # 每个关键词单独搜一次,比拉全量再过滤命中率高得多
   queries:
-    - "product manager"
+    - "engineering manager"
+    - "technical program manager"
+    - "technical project manager"
+    - "engineering program manager"
     - "product owner"
+    - "product manager"
     - "project manager"
     - "programme manager"
-    - "delivery manager"
-    - "scrum master"
+    - "R&D manager"
+    - "NPI manager"
+    - "development manager"
 
 # ---------- 数据清洗 ----------
 filters:
