@@ -1,6 +1,6 @@
 # 新加坡公司直连招聘接口(实测可用)
-# tags 用于在页面上给职位打分类标签,一个公司可有多个标签。
-# 可用标签:半导体与精密制造 / 医疗器械与光学 / 德企亚太总部 / 中资出海 / 科技与平台
+# 标签:半导体与精密制造 / 航空与MRO / 医疗器械与光学 / 德企(非汽车) /
+#       能源与可持续 / 科技与平台 / 中资出海 / ⚠德国汽车供应链
 companies:
 - name: GovTech Singapore
   ats: greenhouse
@@ -76,7 +76,7 @@ companies:
   ats: smartrecruiters
   slug: continental
   tags:
-  - 德企亚太总部
+  - 德企(非汽车)
 - name: SHEIN
   ats: greenhouse
   slug: shein
@@ -103,4 +103,10 @@ companies:
   slug: zeiss
   tags:
   - 医疗器械与光学
-  - 德企亚太总部
+  - 德企(非汽车)
+- name: Rolls-Royce
+  ats: workday
+  url: https://rollsroyce.wd3.myworkdayjobs.com/wday/cxs/rollsroyce/Professional/jobs
+  search: Singapore
+  tags:
+  - 航空与MRO
