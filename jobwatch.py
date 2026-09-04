@@ -158,7 +158,7 @@ def split_new(conn, jobs):
         conn.execute(
             "INSERT OR IGNORE INTO jobs VALUES (?,?,?,?,?,?,?,?,?)",
             (j.uid, j.source, j.company, j.title, j.location, j.url,
-             j.posted, now, j.extra.get("igm", "")),
+             j.posted, now, ",".join(j.extra.get("cats") or [])),
         )
     conn.commit()
     return fresh
@@ -240,7 +240,7 @@ def _row_to_job(r):
     c, ti, l, u, po, s, igm, fs = r
     j = Job(uid="", source=s, company=c, title=ti, location=l, url=u, posted=po)
     if igm:
-        j.extra["igm"] = igm
+        j.extra["cats"] = [x for x in igm.split(",") if x]
     j.extra["first_seen"] = fs
     return j
 
@@ -704,9 +704,11 @@ def fetch_companies():
     conf = load_yaml(COMPANIES_PATH, default={"companies": []})
     out = []
     for c in conf.get("companies") or []:
+        _n_before = 0
         name = c.get("name") or c.get("slug", "?")
         ats = (c.get("ats") or "").lower()
         try:
+            _n_before = len(out)
             if ats == "workday":
                 out += ats_workday(c, name)
             elif ats == "successfactors":
@@ -720,6 +722,8 @@ def fetch_companies():
             else:
                 print(f"  [跳过] {name}: 未知 ats '{ats}'")
                 continue
+            for _j in out[_n_before:]:
+                _j.extra["cats"] = classify(_j, c.get("tags"))
             print(f"  [OK] {name} ({ats})")
         except Exception as e:
             print(f"  [失败] {name} ({ats}): {type(e).__name__} {e}")
@@ -788,6 +792,10 @@ h1{font-size:23px;margin:0 0 4px;letter-spacing:-.01em}
 .j a{color:var(--tx);text-decoration:none;font-weight:600}
 .j a:hover{color:var(--acc)}
 .meta{color:var(--mut);font-size:12.5px;margin-top:4px}
+.chips{margin:4px 0 20px;line-height:2.1}
+.chips .cat{margin:0 6px 0 0}
+.cat{display:inline-block;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;
+     font-weight:600;margin-left:6px;letter-spacing:.02em}
 .tag{display:inline-block;background:#f0ede7;border-radius:4px;padding:1px 6px;
      font-size:11px;color:var(--mut);margin-left:6px}
 .tag.igm{background:#2f7d32;color:#fff;font-weight:700;cursor:help;letter-spacing:.04em;
@@ -804,10 +812,85 @@ details summary{cursor:pointer;color:var(--acc);font-size:13px;margin-bottom:10p
 """
 
 
+
+# ----------------------------------------------------------------------------
+# 岗位分类:按公司名 / 行业关键词打标签,一个岗位可有多个标签
+# ----------------------------------------------------------------------------
+
+CATEGORY_RULES = [
+    ("半导体与精密制造", [
+        "micron", "globalfoundries", "global foundries", "applied materials", "kla",
+        "lam research", "asml", "amd", "intel", "tsmc", "umc", "infineon", "stmicro",
+        "western digital", "seagate", "siltronic", "soitec", "ase ", "amkor",
+        "kulicke", "ultra clean", "entegris", "onto innovation", "nanofilm",
+        "semiconductor", "wafer", "fab ", "photonics", "precision engineering",
+        "advanced micro", "murata", "tdk", "jabil", "flex ", "venture corp",
+    ]),
+    ("医疗器械与光学", [
+        "medtronic", "essilor", "luxottica", "alcon", "hoya", "zeiss", "carl zeiss",
+        "becton", "baxter", "abbott", "johnson & johnson", "j&j", "stryker",
+        "boston scientific", "siemens healthineers", "healthineers", "philips",
+        "b. braun", "fresenius", "dentsply", "coloplast", "smith & nephew",
+        "medical device", "medtech", "ophthalmic", "optical", "lens",
+        "in-vitro", "diagnostics", "biosensor", "thermo fisher", "agilent",
+    ]),
+    ("德企亚太总部", [
+        "siemens", "bosch", "continental", "zf ", "schaeffler", "thyssenkrupp",
+        "tuv sud", "tüv süd", "tuv rheinland", "rohde", "festo", "sick ag", "beckhoff",
+        "trumpf", "sap ", "basf", "bayer", "merck", "henkel", "linde",
+        "zeiss", "knorr-bremse", "man ", "daimler", "mercedes", "bmw", "volkswagen",
+        "audi", "porsche", "lufthansa", "dhl", "deutsche", "german",
+        "wacker", "evonik", "covestro", "brose", "mahle", "hella", "webasto",
+    ]),
+    ("中资出海", [
+        "bytedance", "tiktok", "shein", "temu", "pdd", "alibaba", "lazada", "ant group",
+        "tencent", "huawei", "xiaomi", "byd", "nio", "xpeng", "li auto", "catl",
+        "haier", "midea", "hisense", "goertek", "luxshare", "wingtech", "sunwoda",
+        "china ", "sinopec", "cosco", "shopee", "sea limited",
+    ]),
+    ("航空与国防", [
+        "st engineering", "rolls-royce", "rolls royce", "pratt & whitney", "collins aerospace",
+        "airbus", "boeing", "safran", "thales", "honeywell aerospace", "gkn",
+        "singapore technologies", "sia engineering", "aerospace", "mro ",
+    ]),
+    ("能源与可持续", [
+        "shell", "exxonmobil", "keppel", "sembcorp", "vestas", "siemens energy",
+        "schneider electric", "abb ", "sunseap", "energy", "sustainability",
+        "decarbon", "renewable", "hydrogen", "battery",
+    ]),
+]
+
+
+def classify(job, company_tags=None):
+    """返回该职位的标签列表。公司在直连清单里的用预设标签,
+    其余(如 MyCareersFuture 来的)按公司名+职位名关键词判断。"""
+    tags = list(company_tags or [])
+    hay = f"{job.company} {job.title}".lower()
+    for cat, needles in CATEGORY_RULES:
+        if cat in tags:
+            continue
+        if any(n in hay for n in needles):
+            tags.append(cat)
+    return tags
+
+
+TAG_COLORS = {
+    "半导体与精密制造": "#1d4ed8",
+    "医疗器械与光学": "#047857",
+    "德企亚太总部": "#b45309",
+    "中资出海": "#b91c1c",
+    "航空与国防": "#4338ca",
+    "能源与可持续": "#0f766e",
+    "科技与平台": "#6b7280",
+}
+
+
 def _job_card(j):
     lbl = age_label(j)
     posted = f'<span class=tag>{html.escape(lbl)}</span>' if lbl else ""
-    igm = ""
+    igm = "".join(
+        f'<span class=cat style="background:{TAG_COLORS.get(c, "#6b7280")}">{html.escape(c)}</span>'
+        for c in (j.extra.get("cats") or []))
     return (f'<div class=j><a href="{html.escape(j.url)}" target=_blank rel=noopener>'
             f'{html.escape(j.title)}</a>{igm}{posted}'
             f'<div class=meta>{html.escape(j.company)} · '
@@ -841,6 +924,16 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
              f"<div class=sub>更新于 {ts} UTC · 最近 {maxage} 天 <b>{len(fresh)}</b> 条"
              f"· 库中累计 {total_seen} 条</div>"]
 
+    cnt = {}
+    for j in fresh:
+        for c in (j.extra.get("cats") or []):
+            cnt[c] = cnt.get(c, 0) + 1
+    if cnt:
+        chips = "".join(
+            f'<span class=cat style="background:{TAG_COLORS.get(c, "#6b7280")}">'
+            f'{html.escape(c)} {n}</span>'
+            for c, n in sorted(cnt.items(), key=lambda kv: -kv[1]))
+        parts.append(f"<div class=chips>{chips}</div>")
     parts.append(f"<div class=sec>最近 {maxage} 天内的职位 · {len(fresh)} 条</div>")
     if fresh:
         parts += cards(fresh)
@@ -906,6 +999,9 @@ def cmd_run(cfg):
     raw += company_jobs
 
     max_age = int((cfg.get("filters") or {}).get("max_posted_age_days", 365))
+    for j in raw:
+        if "cats" not in j.extra:
+            j.extra["cats"] = classify(j)
     kept, stale = [], 0
     for j in raw:
         if not (matches_keywords(j, cfg["keywords"]) and matches_location(j, cfg["location"])):

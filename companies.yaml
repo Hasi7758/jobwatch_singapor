@@ -1,54 +1,106 @@
 # 新加坡公司直连招聘接口(实测可用)
+# tags 用于在页面上给职位打分类标签,一个公司可有多个标签。
+# 可用标签:半导体与精密制造 / 医疗器械与光学 / 德企亚太总部 / 中资出海 / 科技与平台
 companies:
 - name: GovTech Singapore
   ats: greenhouse
   slug: govtech
+  tags:
+  - 科技与平台
 - name: Ninja Van
   ats: lever
   slug: ninjavan
+  tags:
+  - 科技与平台
 - name: Nium
   ats: lever
   slug: nium
+  tags:
+  - 科技与平台
 - name: Grab
   ats: smartrecruiters
   slug: grab
+  tags:
+  - 科技与平台
 - name: Stripe
   ats: greenhouse
   slug: stripe
+  tags:
+  - 科技与平台
 - name: Thoughtworks
   ats: greenhouse
   slug: thoughtworks
+  tags:
+  - 科技与平台
 - name: Xendit
   ats: greenhouse
   slug: xendit
+  tags:
+  - 科技与平台
 - name: ByteDance
   ats: smartrecruiters
   slug: bytedance
+  tags:
+  - 科技与平台
+  - 中资出海
 - name: Micron
   ats: workday
   url: https://micron.wd1.myworkdayjobs.com/wday/cxs/micron/External/jobs
   search: Singapore
+  tags:
+  - 半导体与精密制造
 - name: GlobalFoundries
   ats: workday
   url: https://globalfoundries.wd1.myworkdayjobs.com/wday/cxs/globalfoundries/External/jobs
   search: Singapore
+  tags:
+  - 半导体与精密制造
 - name: Applied Materials
   ats: workday
   url: https://amat.wd1.myworkdayjobs.com/wday/cxs/amat/External/jobs
   search: Singapore
+  tags:
+  - 半导体与精密制造
 - name: Medtronic
   ats: workday
   url: https://medtronic.wd1.myworkdayjobs.com/wday/cxs/medtronic/MedtronicCareers/jobs
   search: Singapore
+  tags:
+  - 医疗器械与光学
 - name: EssilorLuxottica
   ats: smartrecruiters
   slug: essilorluxottica
+  tags:
+  - 医疗器械与光学
 - name: Continental
   ats: smartrecruiters
   slug: continental
+  tags:
+  - 德企亚太总部
 - name: SHEIN
   ats: greenhouse
   slug: shein
+  tags:
+  - 中资出海
 - name: GitLab
   ats: greenhouse
   slug: gitlab
+  tags:
+  - 科技与平台
+- name: KLA
+  ats: workday
+  url: https://kla.wd1.myworkdayjobs.com/wday/cxs/kla/Search/jobs
+  search: Singapore
+  tags:
+  - 半导体与精密制造
+- name: Western Digital
+  ats: smartrecruiters
+  slug: westerndigital
+  tags:
+  - 半导体与精密制造
+- name: Carl Zeiss
+  ats: lever
+  slug: zeiss
+  tags:
+  - 医疗器械与光学
+  - 德企亚太总部
