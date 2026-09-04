@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1616 条
+  拿到 1617 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -21,11 +21,13 @@
   [OK] Western Digital (smartrecruiters)
   [OK] Carl Zeiss (lever)
   [OK] Rolls-Royce (workday)
-  拿到 3784 条
+  [OK] AMD (phenom)
+  [OK] Keysight (phenom)
+  拿到 3952 条
 
-过滤后 762 / 5400 条符合关键词+地点
+过滤后 774 / 5569 条符合关键词+地点
 
-首次运行:已把现有 762 条收作基线,不算新职位。
+首次运行:已把现有 774 条收作基线,不算新职位。
 从下一次运行起,只会显示真正新增的。
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
