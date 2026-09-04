@@ -9,11 +9,19 @@
   [OK] Thoughtworks (greenhouse)
   [OK] Xendit (greenhouse)
   [OK] ByteDance (smartrecruiters)
-  拿到 1564 条
+  [OK] Micron (workday)
+  [OK] GlobalFoundries (workday)
+  [OK] Applied Materials (workday)
+  [OK] Medtronic (workday)
+  [OK] EssilorLuxottica (smartrecruiters)
+  [OK] Continental (smartrecruiters)
+  [OK] SHEIN (greenhouse)
+  [OK] GitLab (greenhouse)
+  拿到 3233 条
 
-过滤后 513 / 2494 条符合关键词+地点
+过滤后 654 / 4163 条符合关键词+地点
 
-首次运行:已把现有 513 条收作基线,不算新职位。
+首次运行:已把现有 654 条收作基线,不算新职位。
 从下一次运行起,只会显示真正新增的。
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
