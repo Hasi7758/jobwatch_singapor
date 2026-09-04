@@ -1,0 +1,19 @@
+抓取 MyCareersFuture…
+  拿到 930 条
+抓取公司 ATS…
+  [OK] GovTech Singapore (greenhouse)
+  [OK] Ninja Van (lever)
+  [OK] Nium (lever)
+  [OK] Grab (smartrecruiters)
+  [OK] Stripe (greenhouse)
+  [OK] Thoughtworks (greenhouse)
+  [OK] Xendit (greenhouse)
+  [OK] ByteDance (smartrecruiters)
+  拿到 1564 条
+
+过滤后 513 / 2494 条符合关键词+地点
+
+首次运行:已把现有 513 条收作基线,不算新职位。
+从下一次运行起,只会显示真正新增的。
+
+报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
