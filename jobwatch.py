@@ -228,7 +228,7 @@ def age_label(j):
     return f"{src}于 {n} 天前"
 
 
-def all_current(conn, limit=500):
+def all_current(conn, limit=3000):
     """库中全部职位,IG Metall 优先、新入库在前。"""
     rows = conn.execute(
         "SELECT company,title,location,url,posted,source,igm,first_seen FROM jobs "
@@ -1012,6 +1012,7 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
                      f'下面列出最新的一批供参考。</div>')
         parts += cards(older[:25])
 
+    prio_all.sort(key=lambda j: (job_age_days(j)[0] if job_age_days(j)[0] is not None else 500))
     if prio_all:
         parts.append(f"<div class=sec>重点方向全部在招 · {len(prio_all)} 条"
                      f"<span class=hint>(半导体 / 航空MRO / 医疗光学 / 德企非汽车,不限日期)</span></div>")
