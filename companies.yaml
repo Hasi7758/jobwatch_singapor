@@ -1,6 +1,6 @@
 # 新加坡公司直连招聘接口(实测可用)
 # 标签:半导体与精密制造 / 航空与MRO / 医疗器械与光学 / 德企(非汽车) /
-#       能源与可持续 / 科技与平台 / 中资出海 / ⚠德国汽车供应链
+#       能源与可持续 / 科技与平台 / 中资出海 / ⚠德国汽车供应链 / 🇩🇪德国企业(自动)
 companies:
 - name: GovTech Singapore
   ats: greenhouse
@@ -135,3 +135,35 @@ companies:
   tags:
   - 医疗器械与光学
   keyword: Singapore
+- name: SAP
+  ats: successfactors
+  url: https://jobs.sap.com
+  location: Singapore
+  tags:
+  - 德企(非汽车)
+  - 科技与平台
+- name: Festo
+  ats: successfactors
+  url: https://jobs.festo.com
+  location: Singapore
+  tags:
+  - 德企(非汽车)
+- name: Schaeffler
+  ats: successfactors
+  url: https://jobs.schaeffler.com
+  location: Singapore
+  tags:
+  - ⚠德国汽车供应链
+- name: Bayer
+  ats: successfactors
+  url: https://jobs.bayer.com
+  location: Singapore
+  tags:
+  - 德企(非汽车)
+  - 医疗器械与光学
+- name: ZF
+  ats: successfactors
+  url: https://jobs.zf.com
+  location: Singapore
+  tags:
+  - ⚠德国汽车供应链
