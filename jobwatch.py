@@ -1148,7 +1148,7 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
         for c in (j.extra.get("cats") or []):
             cnt_all[c] = cnt_all.get(c, 0) + 1
     if cnt_all:
-        chips = ('<button class="chip active" data-f="__all__">全部</button>' +
+        chips = ('<button class="chip" data-f="__all__">全部</button>' +
                  "".join(
                      f'<button class=chip data-f="{html.escape(c)}" '
                      f'style="background:{TAG_COLORS.get(c, "#6b7280")}">'
@@ -1181,32 +1181,59 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
     parts.append("""
 <script>
 (function(){
-  var chips=document.querySelectorAll('.chip');
-  var cards=document.querySelectorAll('.j');
+  var chips=[].slice.call(document.querySelectorAll('.chip'));
+  var cards=[].slice.call(document.querySelectorAll('.j'));
+  var heads=[].slice.call(document.querySelectorAll('.sec,.sec2,.grp,.note'));
+  var dets=[].slice.call(document.querySelectorAll('details'));
   var info=document.getElementById('finfo');
+  var cur=null;
+
+  function reset(){
+    cards.forEach(function(c){c.style.display='';});
+    heads.forEach(function(s){s.style.display='';});
+    dets.forEach(function(d){d.style.display='';d.open=false;});
+    chips.forEach(function(x){x.classList.remove('active');});
+    info.textContent='';
+    cur=null;
+  }
+
   function apply(f){
     var shown=0;
     cards.forEach(function(c){
       var cats=(c.getAttribute('data-cats')||'').split('|');
-      var ok=(f==='__all__')||cats.indexOf(f)>=0;
+      var ok=cats.indexOf(f)>=0;
       c.style.display=ok?'':'none';
       if(ok)shown++;
     });
-    document.querySelectorAll('.sec,.sec2,.grp,.note,details').forEach(function(s){
+    // 折叠区自动展开,否则筛出来的职位藏在里面看不见
+    dets.forEach(function(d){
+      var any=d.querySelectorAll('.j:not([style*="none"])').length>0;
+      d.style.display=any?'':'none';
+      d.open=any;
+    });
+    // 标题:后面若无可见职位则隐藏
+    heads.forEach(function(s){
       var n=s.nextElementSibling,any=false;
-      while(n&&!n.classList.contains('sec')&&!n.classList.contains('sec2')&&!n.classList.contains('grp')){
+      while(n){
+        if(n.classList.contains('sec')||n.classList.contains('sec2')||n.classList.contains('grp'))break;
         if(n.classList.contains('j')&&n.style.display!=='none'){any=true;break;}
+        if(n.tagName==='DETAILS'&&n.style.display!=='none'){any=true;break;}
         n=n.nextElementSibling;
       }
-      s.style.display=(f==='__all__'||any)?'':'none';
+      s.style.display=any?'':'none';
     });
-    info.textContent=(f==='__all__')?'':('已筛选:'+f+' — 显示 '+shown+' 条,再次点击「全部」恢复');
+    info.textContent='已筛选:'+f+' — 共 '+shown+' 条(再点一次该标签可取消)';
+    cur=f;
   }
+
   chips.forEach(function(b){
     b.addEventListener('click',function(){
-      chips.forEach(function(x){x.classList.remove('active')});
+      var f=b.getAttribute('data-f');
+      if(f==='__all__'){reset();return;}
+      if(cur===f){reset();return;}          // 再点一次 = 取消筛选
+      chips.forEach(function(x){x.classList.remove('active');});
       b.classList.add('active');
-      apply(b.getAttribute('data-f'));
+      apply(f);
     });
   });
 })();
