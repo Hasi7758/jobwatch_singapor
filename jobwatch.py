@@ -920,7 +920,13 @@ h1{font-size:23px;margin:0 0 4px;letter-spacing:-.01em}
 .j a{color:var(--tx);text-decoration:none;font-weight:600}
 .j a:hover{color:var(--acc)}
 .meta{color:var(--mut);font-size:12.5px;margin-top:4px}
-.chips{margin:4px 0 20px;line-height:2.1}
+.chips{margin:6px 0 8px;line-height:2.3}
+.chip{display:inline-block;color:#fff;border:none;border-radius:5px;padding:4px 10px;
+      font-size:12px;font-weight:600;margin:0 6px 6px 0;cursor:pointer;opacity:.55;
+      background:#6b7280;font-family:inherit}
+.chip:hover{opacity:.85}
+.chip.active{opacity:1;box-shadow:0 0 0 2px var(--tx)}
+.filterinfo{font-size:12.5px;color:var(--mut);min-height:18px;margin-bottom:14px}
 .chips .cat{margin:0 6px 0 0}
 .cat{display:inline-block;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;
      font-weight:600;margin-left:6px;letter-spacing:.02em}
@@ -1002,6 +1008,39 @@ GENERIC_OK = {
 
 
 
+
+# 德国本部企业(总标签,含汽车供应链;与"德企(非汽车)"并存,便于分别筛选)
+GERMAN_HQ = [
+    "siemens", "bosch", "robert bosch", "continental", "zf ", "zf friedrichshafen",
+    "schaeffler", "thyssenkrupp", "zeiss", "carl zeiss", "tuv sud", "tüv süd",
+    "tuv rheinland", "tuv nord", "dekra", "rohde", "festo", "sick ag", "beckhoff",
+    "trumpf", "sap ", "sap se", "basf", "bayer", "merck kgaa", "henkel", "linde",
+    "evonik", "covestro", "wacker", "lufthansa", "dhl", "deutsche post",
+    "deutsche bank", "allianz", "munich re", "knorr-bremse", "man se", "man truck",
+    "daimler", "mercedes", "bmw", "volkswagen", "audi", "porsche", "webasto",
+    "mahle", "hella", "brose", "vitesco", "infineon", "siltronic", "aixtron",
+    "jenoptik", "heraeus", "freudenberg", "kion", "dürr", "duerr", "gea group",
+    "krones", "kuka", "leoni", "osram", "phoenix contact", "rational ag",
+    "sartorius", "schott", "stihl", "voith", "wago", "wuerth", "würth",
+    "b. braun", "boehringer", "fresenius", "siemens healthineers", "siemens energy",
+    "rodenstock", "leica", "bosch rexroth", "harting", "hbm", "kärcher", "karcher",
+    "miele", "liebherr", "claas", "fendt", "deutz", "rheinmetall", "hensoldt",
+    "diehl", "eberspächer", "eberspaecher", "elringklinger", "norma group",
+]
+
+
+def is_german_hq(job):
+    comp = f" {(job.company or '').lower()} "
+    for n in GERMAN_HQ:
+        n = n.strip()
+        if len(n) <= 4:
+            if f" {n} " in comp or comp.strip() == n:
+                return True
+        elif n in comp:
+            return True
+    return False
+
+
 # ---- 三语/跨区域优势识别 ----
 # 你的中文母语+德语+欧洲工程背景在这类岗位上价值最大
 TRILINGUAL_HINTS = [
@@ -1035,6 +1074,8 @@ def classify(job, company_tags=None):
             if hit_comp or (n in GENERIC_OK and n in title):
                 tags.append(cat)
                 break
+    if is_german_hq(job) and "🇩🇪德国企业" not in tags:
+        tags.append("🇩🇪德国企业")
     if is_trilingual_fit(job):
         tags.append("🌏三语/跨区域")
     return tags
@@ -1050,6 +1091,7 @@ TAG_COLORS = {
     "中资出海": "#9333ea",
     "⚠德国汽车供应链": "#9ca3af",
     "🌏三语/跨区域": "#7c3aed",
+    "🇩🇪德国企业": "#a16207",
 }
 
 
@@ -1059,7 +1101,8 @@ def _job_card(j):
     igm = "".join(
         f'<span class=cat style="background:{TAG_COLORS.get(c, "#6b7280")}">{html.escape(c)}</span>'
         for c in (j.extra.get("cats") or []))
-    return (f'<div class=j><a href="{html.escape(j.url)}" target=_blank rel=noopener>'
+    return (f'<div class=j data-cats="{html.escape("|".join(j.extra.get("cats") or []))}">'
+            f'<a href="{html.escape(j.url)}" target=_blank rel=noopener>'
             f'{html.escape(j.title)}</a>{igm}{posted}'
             f'<div class=meta>{html.escape(j.company)} · '
             f'{html.escape(j.source)} · '
@@ -1099,12 +1142,20 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
     for j in fresh:
         for c in (j.extra.get("cats") or []):
             cnt[c] = cnt.get(c, 0) + 1
-    if cnt:
-        chips = "".join(
-            f'<span class=cat style="background:{TAG_COLORS.get(c, "#6b7280")}">'
-            f'{html.escape(c)} {n}</span>'
-            for c, n in sorted(cnt.items(), key=lambda kv: -kv[1]))
-        parts.append(f"<div class=chips>{chips}</div>")
+    # 统计全部(不只 fresh),让筛选覆盖整页
+    cnt_all = {}
+    for j in (fresh + prio_all + older):
+        for c in (j.extra.get("cats") or []):
+            cnt_all[c] = cnt_all.get(c, 0) + 1
+    if cnt_all:
+        chips = ('<button class="chip active" data-f="__all__">全部</button>' +
+                 "".join(
+                     f'<button class=chip data-f="{html.escape(c)}" '
+                     f'style="background:{TAG_COLORS.get(c, "#6b7280")}">'
+                     f'{html.escape(c)} {n}</button>'
+                     for c, n in sorted(cnt_all.items(), key=lambda kv: -kv[1])))
+        parts.append(f'<div class=chips>{chips}</div>'
+                     f'<div class=filterinfo id=finfo></div>')
     parts.append(f"<div class=sec>最近 {maxage} 天内的职位 · {len(fresh)} 条</div>")
     if fresh:
         parts += cards(fresh)
@@ -1127,6 +1178,39 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
         parts.append("</details>")
 
     parts.append("</div>")
+    parts.append("""
+<script>
+(function(){
+  var chips=document.querySelectorAll('.chip');
+  var cards=document.querySelectorAll('.j');
+  var info=document.getElementById('finfo');
+  function apply(f){
+    var shown=0;
+    cards.forEach(function(c){
+      var cats=(c.getAttribute('data-cats')||'').split('|');
+      var ok=(f==='__all__')||cats.indexOf(f)>=0;
+      c.style.display=ok?'':'none';
+      if(ok)shown++;
+    });
+    document.querySelectorAll('.sec,.sec2,.grp,.note,details').forEach(function(s){
+      var n=s.nextElementSibling,any=false;
+      while(n&&!n.classList.contains('sec')&&!n.classList.contains('sec2')&&!n.classList.contains('grp')){
+        if(n.classList.contains('j')&&n.style.display!=='none'){any=true;break;}
+        n=n.nextElementSibling;
+      }
+      s.style.display=(f==='__all__'||any)?'':'none';
+    });
+    info.textContent=(f==='__all__')?'':('已筛选:'+f+' — 显示 '+shown+' 条,再次点击「全部」恢复');
+  }
+  chips.forEach(function(b){
+    b.addEventListener('click',function(){
+      chips.forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active');
+      apply(b.getAttribute('data-f'));
+    });
+  });
+})();
+</script>""")
     doc = "".join(parts)
     OUT_HTML.write_text(doc, encoding="utf-8")
     DOCS_HTML.parent.mkdir(exist_ok=True)
