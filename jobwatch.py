@@ -276,7 +276,8 @@ def matches_keywords(job, kw):
 def matches_location(job, loc):
     text = f"{job.location}".lower()
     if not text.strip():
-        return True  # 位置信息缺失时不误杀,交给关键词过滤
+        # 地点未知时是否放行。新加坡版必须收紧,否则全球岗位会混进来。
+        return not loc.get("require_location", True)
     if any(t.lower() in text for t in loc.get("terms", [])):
         return True
     if loc.get("allow_remote") and re.search(r"remote|home\s?office|ortsunabh", text):
@@ -563,6 +564,9 @@ def ats_workday(cfg_entry, name):
     """Workday 需要 POST,且每家公司的 tenant/site 不同。"""
     url = cfg_entry["url"]          # 例:https://x.wd3.myworkdayjobs.com/wday/cxs/x/Careers/jobs
     base = url.split("/wday/")[0]
+    # 从 cxs 路径里取出站点名,否则拼出来的链接会 404
+    m = re.search(r"/wday/cxs/[^/]+/([^/]+)/jobs", url)
+    site = m.group(1) if m else ""
     jobs, offset = [], 0
     while offset < 400:
         r = session.post(url, json={"appliedFacets": {}, "limit": 20,
@@ -582,7 +586,7 @@ def ats_workday(cfg_entry, name):
                 company=name,
                 title=j.get("title", ""),
                 location=j.get("locationsText", "") or "",
-                url=base + path,
+                url=base + ("/" + site if site else "") + path,
                 posted=j.get("postedOn", ""),
             ))
         if len(items) < 20:
@@ -850,7 +854,10 @@ def fetch_companies():
             else:
                 print(f"  [跳过] {name}: 未知 ats '{ats}'")
                 continue
+            _dl = c.get("default_location")
             for _j in out[_n_before:]:
+                if _dl and not (_j.location or "").strip():
+                    _j.location = _dl
                 _j.extra["cats"] = classify(_j, c.get("tags"))
             print(f"  [OK] {name} ({ats})")
         except Exception as e:

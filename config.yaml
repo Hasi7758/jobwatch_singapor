@@ -87,7 +87,10 @@ keywords:
 
 # ---------- 地点:整个新加坡 ----------
 location:
-  terms: ["singapore", "sg", "singapura"]
+  # 地点未标注的岗位是否放行。true = 丢弃(避免全球岗位混入)
+  require_location: true
+  terms: ["singapore", "singapura", "jurong", "tuas", "changi", "woodlands",
+          "tampines", "one-north", "buona vista", "seletar", "paya lebar"]
   allow_remote: true
   plz_prefixes: []
 

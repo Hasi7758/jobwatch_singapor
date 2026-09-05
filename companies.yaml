@@ -1,17 +1,18 @@
 # 新加坡公司直连招聘接口(实测可用)
-# 标签:半导体与精密制造 / 航空与MRO / 医疗器械与光学 / 德企(非汽车) /
-#       能源与可持续 / 科技与平台 / 中资出海 / ⚠德国汽车供应链 / 🇩🇪德国企业(自动)
+# default_location: 该招聘站只发新加坡岗位时补默认地点
 companies:
 - name: GovTech Singapore
   ats: greenhouse
   slug: govtech
   tags:
   - 科技与平台
+  default_location: Singapore
 - name: Ninja Van
   ats: lever
   slug: ninjavan
   tags:
   - 科技与平台
+  default_location: Singapore
 - name: Nium
   ats: lever
   slug: nium
@@ -128,6 +129,7 @@ companies:
   location: Singapore
   tags:
   - 航空与MRO
+  default_location: Singapore
 - name: HOYA
   ats: oracle
   url: https://fa-esta-saasfaprod1.fa.ocs.oraclecloud.com
