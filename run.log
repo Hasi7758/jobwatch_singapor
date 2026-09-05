@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1589 条
+  拿到 1590 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -26,9 +26,10 @@
   [OK] ST Engineering (successfactors)
   拿到 4052 条
 
-过滤后 799 / 5641 条符合关键词+地点
+过滤后 801 / 5642 条符合关键词+地点
 
-首次运行:已把现有 799 条收作基线,不算新职位。
-从下一次运行起,只会显示真正新增的。
+★ 新职位 2 条
+  · PROJECT MANAGEMENT MANAGER — VENTUREFORT CONTRACTS & SERVIC
+  · PROJECT MANAGEMENT MANAGER — VENTUREFORT CONTRACTS & SERVIC
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
