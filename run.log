@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1147 条
+  拿到 1130 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -25,11 +25,17 @@
   [OK] Keysight (phenom)
   [OK] ST Engineering (successfactors)
   [OK] HOYA (oracle)
-  拿到 4052 条
+  [OK] SAP (successfactors)
+  [OK] Festo (successfactors)
+  [OK] Schaeffler (successfactors)
+  [OK] Bayer (successfactors)
+  [OK] ZF (successfactors)
+  拿到 4116 条
 丢弃过期职位 2 条(发布超过 365 天)
 
-过滤后 623 / 5199 条符合关键词+地点
+过滤后 624 / 5246 条符合关键词+地点
 
-★ 新职位 0 条
+首次运行:已把现有 624 条收作基线,不算新职位。
+从下一次运行起,只会显示真正新增的。
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
