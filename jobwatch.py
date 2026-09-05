@@ -655,9 +655,8 @@ def ats_oracle(cfg_entry, name):
     jobs, offset = [], 0
     while offset < 600:
         finder = f"findReqs;siteNumber={site},limit=100,sortBy=POSTING_DATES_DESC"
-        if cfg_entry.get("location_id"):
-            finder += (f",locationId={cfg_entry['location_id']}"
-                       f",locationLevel={cfg_entry.get('location_level', 'country')}")
+        if cfg_entry.get("keyword"):
+            finder += f",keyword={cfg_entry['keyword']}"
         try:
             params = {"onlyData": "true", "finder": finder}
             if offset:
@@ -667,8 +666,10 @@ def ats_oracle(cfg_entry, name):
             if r.status_code != 200:
                 print(f"  [Oracle:{name}] HTTP {r.status_code}")
                 break
-            blk = (r.json().get("items") or [{}])[0]
-            items = blk.get("requisitionList") or []
+            blocks = r.json().get("items") or []
+            items = []
+            for b in blocks:
+                items += b.get("requisitionList") or []
         except Exception as e:
             print(f"  [Oracle:{name}] {type(e).__name__}")
             break
