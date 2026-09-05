@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1587 条
+  拿到 1589 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -23,26 +23,12 @@
   [OK] Rolls-Royce (workday)
   [OK] AMD (phenom)
   [OK] Keysight (phenom)
-  拿到 3953 条
+  [OK] ST Engineering (successfactors)
+  拿到 4052 条
 
-过滤后 773 / 5540 条符合关键词+地点
+过滤后 799 / 5641 条符合关键词+地点
 
-★ 新职位 31 条
-  · Assistant Project Manager — VBUILD PTE. LTD.
-  · Assistant Project Manager [ERSS] — FUCHI PTE. LTD.
-  · SENIOR PROJECT MANAGER / PROJECT MANAGER — Land Transport Authority of Si
-  · Assistant Project Manager — NB RESOURCES PTE. LTD.
-  · Project Manager – Learning System Projects — DCI CONSULTANTS PRIVATE LIMITE
-  · Project Manager (Learning Services/ eLearning/ LMS) — OPUS IT SERVICES PTE LTD
-  · Project Manager (Commercial Workplace / Interior Fit-Out Pro — ATLAZ PTE. LTD.
-  · Senior Project Manager — K.B.C. ENGINEERING (PTE. LTD.)
-  · Project Manager /  Senior Project Manager  (Main Con)General — RECRUITFLASH PTE. LTD.
-  · Assistant Project Manager/ Project Manager (Building Project — INTUIT RECRUITMENT PTE. LTD.
-  · Project Manager (HDB Home Improvement Projects) — SEARCH INDEX PTE. LTD.
-  · YR23 - Project Manager – Camps|E&E Industry|ELV/Automation K — THE SUPREME HR ADVISORY PTE. L
-  · Project Manager (5 Days per week, Condo projects) HIRING NOW — BUILDBRIDGE PARTNERS PTE. LTD.
-  · Project Manager (Payment Systems) — CAPGEMINI SINGAPORE  PTE. LTD.
-  · Project Manager (APS Contract) — CHINA COMMUNICATIONS CONSTRUCT
-  …另有 16 条
+首次运行:已把现有 799 条收作基线,不算新职位。
+从下一次运行起,只会显示真正新增的。
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
