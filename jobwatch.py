@@ -328,7 +328,11 @@ def fetch_mcf(cfg):
                 addr = it.get("address") or {}
                 loc = " ".join(str(x) for x in
                                [addr.get("block"), addr.get("street")] if x) or "Singapore"
-                out.append(Job(
+                skills = " ".join(s.get("skill", "") for s in (it.get("skills") or []))
+                levels = " ".join(l.get("position", "") if isinstance(l, dict) else str(l)
+                                  for l in (it.get("positionLevels") or []))
+                cats_txt = " ".join(c.get("category", "") for c in (it.get("categories") or []))
+                _j = Job(
                     uid="mcf:" + str(jid),
                     source="MyCareersFuture",
                     company=comp.get("name") or "-",
@@ -336,7 +340,9 @@ def fetch_mcf(cfg):
                     location=loc,
                     url="https://www.mycareersfuture.gov.sg/job/" + str(jid),
                     posted=meta.get("newPostingDate") or str(meta.get("updatedAt", ""))[:10],
-                ))
+                )
+                _j.extra["desc"] = f"{skills} {levels} {cats_txt}"
+                out.append(_j)
             if len(items) < 100:
                 break
             time.sleep(0.4)
@@ -375,6 +381,25 @@ def ats_personio(slug, name):
 
 
 def ats_greenhouse(slug, name):
+    r = _get(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true")
+    r.raise_for_status()
+    out = []
+    for j in r.json().get("jobs", []):
+        jb = Job(
+            uid=f"gh:{slug}:{j['id']}",
+            source="Greenhouse",
+            company=name,
+            title=j.get("title", ""),
+            location=(j.get("location") or {}).get("name", ""),
+            url=j.get("absolute_url", ""),
+            posted=j.get("first_published") or j.get("updated_at", ""),
+        )
+        jb.extra["desc"] = re.sub(r"<[^>]+>", " ", str(j.get("content") or ""))[:4000]
+        out.append(jb)
+    return out
+
+
+def _ats_greenhouse_old(slug, name):
     r = _get(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs")
     r.raise_for_status()
     return [Job(
@@ -976,6 +1001,23 @@ GENERIC_OK = {
 }
 
 
+
+# ---- 三语/跨区域优势识别 ----
+# 你的中文母语+德语+欧洲工程背景在这类岗位上价值最大
+TRILINGUAL_HINTS = [
+    "mandarin", "chinese", "putonghua", "greater china", "china market",
+    "german", "germany", "deutsch", "europe", "european", "emea",
+    "apac", "asia pacific", "regional", "cross-region", "cross region",
+    "global headquarters", "hq ", "multinational", "japan", "korea",
+]
+
+
+def is_trilingual_fit(job):
+    hay = " ".join([job.title or "", job.company or "",
+                    job.extra.get("desc", "")]).lower()
+    return any(h in hay for h in TRILINGUAL_HINTS)
+
+
 def classify(job, company_tags=None):
     """公司在直连清单里的用预设标签;其余按公司名(品牌词)+职位名(行业通名)判断。"""
     tags = list(company_tags or [])
@@ -993,6 +1035,8 @@ def classify(job, company_tags=None):
             if hit_comp or (n in GENERIC_OK and n in title):
                 tags.append(cat)
                 break
+    if is_trilingual_fit(job):
+        tags.append("🌏三语/跨区域")
     return tags
 
 
@@ -1005,6 +1049,7 @@ TAG_COLORS = {
     "科技与平台": "#6b7280",
     "中资出海": "#9333ea",
     "⚠德国汽车供应链": "#9ca3af",
+    "🌏三语/跨区域": "#7c3aed",
 }
 
 

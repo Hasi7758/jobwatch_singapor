@@ -5,16 +5,20 @@
 # ---------- 关键词(与德国版一致:产品 / 项目管理 / Manager)----------
 keywords:
   include:
-    # —— 工程管理(你现在的层级)——
+    # ===== 主攻:技术交付领导(你的实际能力画像)=====
     - engineering manager
-    - development manager
     - software development manager
+    - development manager
+    - software engineering manager
     - r&d manager
+    - r&d lead
     - head of engineering
+    - head of software
     - engineering lead
     - technical lead
     - tech lead
-    # —— 技术项目/项目群管理(新加坡制造业最常见的抬头)——
+    - team lead software
+    # ===== 主攻:技术项目/项目群管理 =====
     - technical program manager
     - technical project manager
     - engineering program manager
@@ -23,19 +27,21 @@ keywords:
     - programme manager
     - project manager
     - project lead
-    - npi                  # New Product Introduction,新加坡制造业高频词
+    - delivery manager
+    - delivery lead
+    - npi                    # New Product Introduction,新加坡制造业高频
     - new product introduction
     - platform manager
-    # —— 产品(Rodenstock/Schaeffler 的 PO 经历)——
-    - product owner
-    - product manager
+    - release manager
+    - quality manager software
+    # ===== 次要:产品岗(你偏技术型,商业型PM竞争不利)=====
     - technical product manager
-    - product lead
-    # —— 敏捷 ——
+    - technical product owner
+    - product owner
+    - product manager        # 保留但排序靠后
+    # ===== 敏捷 =====
     - scrum master
     - agile coach
-    - delivery manager
-    - manager
 
   exclude:
     # —— 入门级:要有经验的岗位 ——
@@ -95,15 +101,16 @@ mycareersfuture:
   queries:
     - "engineering manager"
     - "technical program manager"
-    - "technical project manager"
     - "engineering program manager"
-    - "product owner"
-    - "product manager"
+    - "R&D manager"
+    - "software development manager"
+    - "NPI manager"
+    - "delivery manager"
+    - "technical project manager"
     - "project manager"
     - "programme manager"
-    - "R&D manager"
-    - "NPI manager"
-    - "development manager"
+    - "technical product manager"
+    - "product owner"
 
 # ---------- 数据清洗 ----------
 filters:
