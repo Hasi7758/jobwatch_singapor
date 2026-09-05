@@ -642,6 +642,56 @@ def ats_hr4you(cfg_entry, name):
 
 
 
+
+def ats_oracle(cfg_entry, name):
+    """
+    Oracle Cloud HCM (Recruiting Cloud)。很多跨国企业在用。
+    公开 REST 接口,返回真实 PostedDate,可按国家过滤。
+    cfg 需要 url(租户域名)、site(如 CX_1001),可选 location_id。
+    """
+    host = cfg_entry["url"].rstrip("/")
+    site = cfg_entry.get("site", "CX_1001")
+    api = f"{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions"
+    jobs, offset = [], 0
+    while offset < 600:
+        finder = f"findReqs;siteNumber={site},limit=100,offset={offset},sortBy=POSTING_DATES_DESC"
+        if cfg_entry.get("location_id"):
+            finder += (f",locationId={cfg_entry['location_id']}"
+                       f",locationLevel={cfg_entry.get('location_level', 'country')}")
+        try:
+            r = session.get(api, params={"onlyData": "true", "finder": finder},
+                            headers={"Accept": "application/json"}, timeout=30)
+            if r.status_code != 200:
+                print(f"  [Oracle:{name}] HTTP {r.status_code}")
+                break
+            blk = (r.json().get("items") or [{}])[0]
+            items = blk.get("requisitionList") or []
+        except Exception as e:
+            print(f"  [Oracle:{name}] {type(e).__name__}")
+            break
+        if not items:
+            break
+        for j in items:
+            jid = j.get("Id")
+            if not jid:
+                continue
+            loc = j.get("PrimaryLocation") or j.get("PrimaryLocationCountry") or ""
+            jobs.append(Job(
+                uid=f"oracle:{name}:{jid}",
+                source="Oracle HCM",
+                company=name,
+                title=j.get("Title") or "-",
+                location=str(loc),
+                url=f"{host}/hcmUI/CandidateExperience/en/sites/{site}/job/{jid}",
+                posted=str(j.get("PostedDate") or "")[:10],
+            ))
+        if len(items) < 100:
+            break
+        offset += 100
+        time.sleep(0.3)
+    return jobs
+
+
 def ats_phenom(cfg_entry, name):
     """
     Phenom People 平台(AMD / Keysight / 多数大型制造企业用)。
@@ -760,6 +810,8 @@ def fetch_companies():
                 out += ats_successfactors(c, name)
             elif ats == "bmw":
                 out += ats_bmw(c, name)
+            elif ats == "oracle":
+                out += ats_oracle(c, name)
             elif ats == "phenom":
                 out += ats_phenom(c, name)
             elif ats == "hr4you":
