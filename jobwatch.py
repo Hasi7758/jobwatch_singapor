@@ -654,12 +654,15 @@ def ats_oracle(cfg_entry, name):
     api = f"{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions"
     jobs, offset = [], 0
     while offset < 600:
-        finder = f"findReqs;siteNumber={site},limit=100,offset={offset},sortBy=POSTING_DATES_DESC"
+        finder = f"findReqs;siteNumber={site},limit=100,sortBy=POSTING_DATES_DESC"
         if cfg_entry.get("location_id"):
             finder += (f",locationId={cfg_entry['location_id']}"
                        f",locationLevel={cfg_entry.get('location_level', 'country')}")
         try:
-            r = session.get(api, params={"onlyData": "true", "finder": finder},
+            params = {"onlyData": "true", "finder": finder}
+            if offset:
+                params["offset"] = offset
+            r = session.get(api, params=params,
                             headers={"Accept": "application/json"}, timeout=30)
             if r.status_code != 200:
                 print(f"  [Oracle:{name}] HTTP {r.status_code}")
