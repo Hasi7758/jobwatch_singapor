@@ -24,12 +24,13 @@
   [OK] AMD (phenom)
   [OK] Keysight (phenom)
   [OK] ST Engineering (successfactors)
+  [Oracle:HOYA] HTTP 400
+  [OK] HOYA (oracle)
   拿到 4052 条
 
 过滤后 801 / 5642 条符合关键词+地点
 
-★ 新职位 2 条
-  · PROJECT MANAGEMENT MANAGER — VENTUREFORT CONTRACTS & SERVIC
-  · PROJECT MANAGEMENT MANAGER — VENTUREFORT CONTRACTS & SERVIC
+首次运行:已把现有 801 条收作基线,不算新职位。
+从下一次运行起,只会显示真正新增的。
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
