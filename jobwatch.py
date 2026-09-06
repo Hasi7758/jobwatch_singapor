@@ -339,7 +339,9 @@ def fetch_mcf(cfg):
                     company=comp.get("name") or "-",
                     title=it.get("title") or "-",
                     location=loc,
-                    url="https://www.mycareersfuture.gov.sg/job/" + str(jid),
+                    url=(meta.get("jobDetailsUrl")
+                         or "https://www.mycareersfuture.gov.sg/job/"
+                            + str(it.get("uuid") or jid)),
                     posted=meta.get("newPostingDate") or str(meta.get("updatedAt", ""))[:10],
                 )
                 _j.extra["desc"] = f"{skills} {levels} {cats_txt}"
