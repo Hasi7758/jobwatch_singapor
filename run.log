@@ -33,9 +33,12 @@
   拿到 4116 条
 丢弃过期职位 2 条(发布超过 365 天)
 
-过滤后 696 / 5246 条符合关键词+地点
+过滤后 695 / 5246 条符合关键词+地点
 
-首次运行:已把现有 696 条收作基线,不算新职位。
-从下一次运行起,只会显示真正新增的。
+★ 新职位 4 条
+  · Project Manager #72107 — ANRADUS PTE. LTD.
+  · Project Manager #77824 — ANRADUS PTE. LTD.
+  · Controls Project Manager (BMS) #75699 — ANRADUS PTE. LTD.
+  · Project Manager (Plumbing & Sanitary) #10269 — ANRADUS PTE. LTD.
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
