@@ -113,6 +113,12 @@ mycareersfuture:
     - "technical product manager"
     - "product owner"
 
+# ---------- 薪资门槛 ----------
+# 只有 MyCareersFuture 提供薪资(新加坡法规要求公开);公司直连源没有,不打标。
+salary:
+  target_min: 11000      # 月薪达到这个数 = 达标(绿标)
+  acceptable_min: 9000   # 低于这个数 = 过低,默认隐藏
+
 # ---------- 数据清洗 ----------
 filters:
   max_posted_age_days: 365

@@ -345,6 +345,13 @@ def fetch_mcf(cfg):
                     posted=meta.get("newPostingDate") or str(meta.get("updatedAt", ""))[:10],
                 )
                 _j.extra["desc"] = f"{skills} {levels} {cats_txt}"
+                sal = it.get("salary") or {}
+                styp = ((sal.get("type") or {}).get("salaryType") or "").lower()
+                mn, mx = sal.get("minimum") or 0, sal.get("maximum") or 0
+                if mn and styp.startswith("month"):
+                    _j.extra["salary"] = (mn, mx or mn)
+                elif mn and styp.startswith("ann"):
+                    _j.extra["salary"] = (mn // 12, (mx or mn) // 12)
                 _j.extra["posted_on_behalf"] = bool(meta.get("isPostedOnBehalf"))
                 _j.extra["schemes_txt"] = json.dumps(it.get("schemes") or [],
                                                      ensure_ascii=False)[:400]
@@ -940,6 +947,8 @@ h1{font-size:23px;margin:0 0 4px;letter-spacing:-.01em}
 .chip.active{opacity:1;box-shadow:0 0 0 2px var(--tx)}
 .filterinfo{font-size:12.5px;color:var(--mut);min-height:18px;margin-bottom:14px}
 .chips .cat{margin:0 6px 0 0}
+.sal{display:inline-block;background:#f0f7f0;color:#15803d;border:1px solid #cde3cd;
+     border-radius:4px;padding:1px 7px;font-size:11.5px;font-weight:600;margin-left:6px}
 .cat{display:inline-block;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;
      font-weight:600;margin-left:6px;letter-spacing:.02em}
 .tag{display:inline-block;background:#f0ede7;border-radius:4px;padding:1px 6px;
@@ -1054,6 +1063,31 @@ def is_german_hq(job):
 
 
 
+
+# ---- 薪资分档 ----
+# MyCareersFuture 依法公开薪资区间(实测 100% 提供);公司直连源没有薪资字段。
+# 所以只对有数据的打标,没数据的不做假设。
+def salary_tag(job, cfg):
+    s = job.extra.get("salary")          # (min, max) 月薪
+    if not s:
+        return None
+    lo, hi = s
+    target = (cfg.get("salary") or {})
+    good = int(target.get("target_min", 11000))
+    ok = int(target.get("acceptable_min", 9000))
+    # 用区间上限判断"够得着",用下限判断"稳妥"
+    if lo >= good:
+        return "💰达标"
+    if hi >= good:
+        return "💰可谈到位"
+    if hi >= ok:
+        return "💰偏低"
+    return "💰过低"
+
+
+SALARY_ORDER = {"💰达标": 0, "💰可谈到位": 1, "💰偏低": 2, "💰过低": 3}
+
+
 # ---- 可能不办 EP 的雇主识别 ----
 # 说明:招聘广告几乎从不写"不办工作签证",只能推断。三条依据:
 #   1) 招聘中介/人力外包 —— 签证责任在终端客户,且多数只做本地人才
@@ -1156,10 +1190,16 @@ TAG_COLORS = {
     "🌏三语/跨区域": "#7c3aed",
     "🇩🇪德国企业": "#a16207",
     "⚠可能不办EP": "#9ca3af",
+    "💰达标": "#15803d",
+    "💰可谈到位": "#65a30d",
+    "💰偏低": "#c2410c",
+    "💰过低": "#9ca3af",
 }
 
 
 def _job_card(j):
+    s = j.extra.get("salary")
+    sal_txt = (f'<span class=sal>S${s[0]:,}–{s[1]:,}/月</span>' if s else "")
     lbl = age_label(j)
     posted = f'<span class=tag>{html.escape(lbl)}</span>' if lbl else ""
     igm = "".join(
@@ -1168,7 +1208,7 @@ def _job_card(j):
     return (f'<div class=j data-cats="{html.escape("|".join(j.extra.get("cats") or []))}">'
             f'<a href="{html.escape(j.url)}" target=_blank rel=noopener>'
             f'{html.escape(j.title)}</a>{igm}{posted}'
-            f'<div class=meta>{html.escape(j.company)} · '
+            f'{sal_txt}<div class=meta>{html.escape(j.company)} · '
             f'{html.escape(j.source)} · '
             f'{html.escape(j.location) or "地点未标注"}</div></div>')
 
@@ -1182,8 +1222,9 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
 
     PRIORITY = {"半导体与精密制造", "航空与MRO", "医疗器械与光学", "德企(非汽车)"}
     NOEP = "⚠可能不办EP"
-    hidden = [j for j in allj if NOEP in (j.extra.get("cats") or [])]
-    allj = [j for j in allj if NOEP not in (j.extra.get("cats") or [])]
+    HIDE = {NOEP, "💰过低"}
+    hidden = [j for j in allj if HIDE & set(j.extra.get("cats") or [])]
+    allj = [j for j in allj if not (HIDE & set(j.extra.get("cats") or []))]
     fresh, older, prio_all = [], [], []
     for j in allj:
         n, _ = job_age_days(j)
@@ -1373,6 +1414,9 @@ def cmd_run(cfg):
     for j in raw:
         if "cats" not in j.extra:
             j.extra["cats"] = classify(j)
+        st = salary_tag(j, cfg)
+        if st:
+            j.extra["cats"] = (j.extra.get("cats") or []) + [st]
     kept, stale = [], 0
     for j in raw:
         if not (matches_keywords(j, cfg["keywords"]) and matches_location(j, cfg["location"])):
