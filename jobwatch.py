@@ -345,6 +345,9 @@ def fetch_mcf(cfg):
                     posted=meta.get("newPostingDate") or str(meta.get("updatedAt", ""))[:10],
                 )
                 _j.extra["desc"] = f"{skills} {levels} {cats_txt}"
+                _j.extra["posted_on_behalf"] = bool(meta.get("isPostedOnBehalf"))
+                _j.extra["schemes_txt"] = json.dumps(it.get("schemes") or [],
+                                                     ensure_ascii=False)[:400]
                 out.append(_j)
             if len(items) < 100:
                 break
@@ -1050,6 +1053,55 @@ def is_german_hq(job):
     return False
 
 
+
+# ---- 可能不办 EP 的雇主识别 ----
+# 说明:招聘广告几乎从不写"不办工作签证",只能推断。三条依据:
+#   1) 招聘中介/人力外包 —— 签证责任在终端客户,且多数只做本地人才
+#   2) 政府及法定机构 —— 常限定 Singaporeans/PR
+#   3) MCF 的 isPostedOnBehalf(代招标志)/ 本地人才计划 schemes
+# 会有误判,所以只隐藏、不丢弃,可随时点标签调出来复查。
+
+AGENCY_NAMES = [
+    "anradus", "recruit express", "scientec", "adecco", "randstad",
+    "robert walters", "michael page", "hays ", "kelly services", "persolkelly",
+    "manpower", "talent trader", "trust recruit", "supreme hr", "search personnel",
+    "jobstudio", "elitez", "recruitpedia", "cvista", "achieve career", "gmp group",
+    "people profilers", "staffking", "flintex", "linkedcorp", "career expert",
+    "ambition group", "morgan mckinley", "charterhouse", "kerry consulting",
+    "candidateasia", "evolution recruitment", "nsearch", "jobline resources",
+    "rapsys", "apba tg", "jobster", "ikas international", "hyperscal", "kopi recruit",
+    "recruiter", "recruitment", "staffing", "headhunt", "manpower", "hr solutions",
+    "human resource", "talent acquisition", "outsourcing", "consultancy services",
+    "employment agency", "jobs pte", "career pte",
+]
+
+GOV_NAMES = [
+    "govtech", "government technology agency", "a*star", "agency for science",
+    "housing & development board", "land transport authority", "cpf board",
+    "inland revenue", "monetary authority of singapore", "ministry of",
+    "national environment agency", "pub board", "jtc corporation",
+    "economic development board", "enterprise singapore", "singapore land authority",
+    "urban redevelopment", "sport singapore", "national parks", "mindef",
+    "dsta", "home team", "civil service", "statutory board", "people's association",
+]
+
+LOCAL_SCHEMES = ["career conversion", "sgunited", "mid-career pathways",
+                 "professional conversion", "place-and-train"]
+
+
+def maybe_no_ep(job):
+    comp = f" {(job.company or '').lower()} "
+    for n in AGENCY_NAMES + GOV_NAMES:
+        if n.strip() in comp:
+            return True
+    if job.extra.get("posted_on_behalf"):
+        return True
+    d = (job.extra.get("schemes_txt") or "").lower()
+    if any(s in d for s in LOCAL_SCHEMES):
+        return True
+    return False
+
+
 # ---- 三语/跨区域优势识别 ----
 # 你的中文母语+德语+欧洲工程背景在这类岗位上价值最大
 TRILINGUAL_HINTS = [
@@ -1087,6 +1139,8 @@ def classify(job, company_tags=None):
         tags.append("🇩🇪德国企业")
     if is_trilingual_fit(job):
         tags.append("🌏三语/跨区域")
+    if maybe_no_ep(job):
+        tags.append("⚠可能不办EP")
     return tags
 
 
@@ -1101,6 +1155,7 @@ TAG_COLORS = {
     "⚠德国汽车供应链": "#9ca3af",
     "🌏三语/跨区域": "#7c3aed",
     "🇩🇪德国企业": "#a16207",
+    "⚠可能不办EP": "#9ca3af",
 }
 
 
@@ -1126,6 +1181,9 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
     allj = fallback or []
 
     PRIORITY = {"半导体与精密制造", "航空与MRO", "医疗器械与光学", "德企(非汽车)"}
+    NOEP = "⚠可能不办EP"
+    hidden = [j for j in allj if NOEP in (j.extra.get("cats") or [])]
+    allj = [j for j in allj if NOEP not in (j.extra.get("cats") or [])]
     fresh, older, prio_all = [], [], []
     for j in allj:
         n, _ = job_age_days(j)
@@ -1163,6 +1221,9 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
                      f'style="background:{TAG_COLORS.get(c, "#6b7280")}">'
                      f'{html.escape(c)} {n}</button>'
                      for c, n in sorted(cnt_all.items(), key=lambda kv: -kv[1])))
+        if hidden:
+            chips += (f'<button class=chip data-f="{NOEP}" style="background:#9ca3af">'
+                      f'{NOEP} {len(hidden)}(已隐藏)</button>')
         parts.append(f'<div class=chips>{chips}</div>'
                      f'<div class=filterinfo id=finfo></div>')
     parts.append(f"<div class=sec>最近 {maxage} 天内的职位 · {len(fresh)} 条</div>")
@@ -1186,6 +1247,14 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
         parts += cards(older[:150])
         parts.append("</details>")
 
+    if hidden:
+        parts.append(f'<div class=sec2 id=noepsec style="display:none">'
+                     f'{NOEP} · {len(hidden)} 条'
+                     f'<span class=hint>(招聘中介 / 政府机构 / 本地人才计划,'
+                     f'多半不为外籍办工作签证;判断可能有误)</span></div>')
+        for j in sorted(hidden, key=lambda x: x.company)[:200]:
+            parts.append(_job_card(j).replace("<div class=j ", "<div class=\"j noep\" ", 1))
+
     parts.append("</div>")
     parts.append("""
 <script>
@@ -1198,7 +1267,10 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
   var cur=null;
 
   function reset(){
-    cards.forEach(function(c){c.style.display='';});
+    cards.forEach(function(c){
+      c.style.display = c.classList.contains('noep') ? 'none' : '';
+    });
+    var ns=document.getElementById('noepsec'); if(ns)ns.style.display='none';
     heads.forEach(function(s){s.style.display='';});
     dets.forEach(function(d){d.style.display='';d.open=false;});
     chips.forEach(function(x){x.classList.remove('active');});
@@ -1214,6 +1286,8 @@ def render_html(day_groups, new_today, total_seen, first_run, cfg, fallback=None
       c.style.display=ok?'':'none';
       if(ok)shown++;
     });
+    var ns=document.getElementById('noepsec');
+    if(ns)ns.style.display=(f.indexOf('EP')>=0)?'':'none';
     // 折叠区自动展开,否则筛出来的职位藏在里面看不见
     dets.forEach(function(d){
       var any=d.querySelectorAll('.j:not([style*="none"])').length>0;
