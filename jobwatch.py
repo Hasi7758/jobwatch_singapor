@@ -125,10 +125,14 @@ def db_connect():
             url        TEXT,
             posted     TEXT,
             first_seen TEXT,
-            igm        TEXT DEFAULT ''
+            igm        TEXT DEFAULT '',
+            salary     TEXT DEFAULT ''
         )
     """)
     conn.execute("CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)")
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(jobs)")}
+    if "salary" not in cols:
+        conn.execute("ALTER TABLE jobs ADD COLUMN salary TEXT DEFAULT ''")
     conn.commit()
     return conn
 
@@ -156,9 +160,10 @@ def split_new(conn, jobs):
         known.add(j.uid)
         fresh.append(j)
         conn.execute(
-            "INSERT OR IGNORE INTO jobs VALUES (?,?,?,?,?,?,?,?,?)",
+            "INSERT OR IGNORE INTO jobs VALUES (?,?,?,?,?,?,?,?,?,?)",
             (j.uid, j.source, j.company, j.title, j.location, j.url,
-             j.posted, now, ",".join(j.extra.get("cats") or [])),
+             j.posted, now, ",".join(j.extra.get("cats") or []),
+             ",".join(str(x) for x in j.extra["salary"]) if j.extra.get("salary") else ""),
         )
     conn.commit()
     return fresh
@@ -231,17 +236,24 @@ def age_label(j):
 def all_current(conn, limit=3000):
     """库中全部职位,IG Metall 优先、新入库在前。"""
     rows = conn.execute(
-        "SELECT company,title,location,url,posted,source,igm,first_seen FROM jobs "
+        "SELECT company,title,location,url,posted,source,igm,first_seen,salary FROM jobs "
         "ORDER BY first_seen DESC LIMIT ?", (limit,)).fetchall()
     return [_row_to_job(r) for r in rows]
 
 
 def _row_to_job(r):
-    c, ti, l, u, po, s, igm, fs = r
+    c, ti, l, u, po, s, igm, fs = r[:8]
+    sal = r[8] if len(r) > 8 else ""
     j = Job(uid="", source=s, company=c, title=ti, location=l, url=u, posted=po)
     if igm:
         j.extra["cats"] = [x for x in igm.split(",") if x]
     j.extra["first_seen"] = fs
+    if sal:
+        try:
+            a, b = sal.split(",")
+            j.extra["salary"] = (int(a), int(b))
+        except Exception:
+            pass
     return j
 
 
@@ -250,7 +262,7 @@ def recent_days(conn, days=2):
     不再排除基线:基线本身就是"那天第一次看到的",同样有参考价值。"""
     cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
     rows = conn.execute(
-        "SELECT company,title,location,url,posted,source,igm,first_seen FROM jobs "
+        "SELECT company,title,location,url,posted,source,igm,first_seen,salary FROM jobs "
         "WHERE first_seen >= ? ORDER BY first_seen DESC", (cutoff,)).fetchall()
     groups = {}
     for r in rows:
