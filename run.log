@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1164 条
+  拿到 1170 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -30,27 +30,27 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 4334 条
-丢弃过期职位 2 条(发布超过 365 天)
+  拿到 4112 条
+丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 705 / 5498 条符合关键词+地点
+过滤后 689 / 5282 条符合关键词+地点
 
-★ 新职位 25 条
-  · Engineering Manager — ASIA METAL ENGINEERING & TRADI
+★ 新职位 28 条
   · Engineering Manager (Shipbuilding) — FOCAL SEARCH PTE. LTD.
-  · Construction Engineering Manager [SL] — WECRUIT PTE. LTD.
-  · Engineering Manager Construction-5 Days [SL] — WECRUIT PTE. LTD.
-  · Construction Engineering Manager-5 Days [SL] — WECRUIT PTE. LTD.
-  · Construction Engineering Manager-Site Office [SL] — WECRUIT PTE. LTD.
+  · Cybersecurity Engineering Manager (IT/ Central/ Attractive B — CAREERALLY PTE. LTD.
+  · Technical Delivery Manager(Data Lakehouse ) — OPTIMUM SOLUTIONS (SINGAPORE) 
+  · Technical Project Manager I — JPMORGAN CHASE BANK, N.A.
+  · Project Manager - AI — IKAS INTERNATIONAL (ASIA) PTE.
   · Project Manager (On-Prem Cloud) — STAR CAREER CONSULTING PTE. LT
-  · Senior Project Manager – AI & Data (Banking Industry) — ABEAM CONSULTING (SINGAPORE) P
-  · Regional AI & Data Project Manager (Japanese Speaking) — ABEAM CONSULTING (SINGAPORE) P
-  · Project Manager, Application Upgrade Project (for Banking In — ABEAM CONSULTING (SINGAPORE) P
-  · Project Manager — V-ELEGANT PTE. LTD.
-  · PROJECT MANAGER CICD — RESOURCE HUNT PTE. LTD.
+  · IT Project Manager (SDLC / Agile) — SCIENTEC CONSULTING PTE. LTD.
+  · IT Project Manager - #1601 — JOBSTER PRIVATE LTD.
+  · Project Manager — KOH BROTHERS BUILDING & CIVIL 
+  · Project Manager #72107 — ANRADUS PTE. LTD.
+  · Project Manager — SING YIET CIVIL ENGINEERING CO
+  · Project Manager #77824 — ANRADUS PTE. LTD.
+  · Project Manager (Regulatory) — PE PHARMA PTE. LTD.
+  · Project Manager — MCC ENGINEERING (SINGAPORE) PT
   · Project Manager — CHINA COMMUNICATIONS CONSTRUCT
-  · Project Manager — HOFEN BUILDERS PTE. LTD.
-  · Assistant Project Manager — HOFEN BUILDERS PTE. LTD.
-  …另有 10 条
+  …另有 13 条
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
