@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1170 条
+  拿到 1148 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -33,24 +33,17 @@
   拿到 4112 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 689 / 5282 条符合关键词+地点
+过滤后 674 / 5260 条符合关键词+地点
 
-★ 新职位 28 条
-  · Engineering Manager (Shipbuilding) — FOCAL SEARCH PTE. LTD.
-  · Cybersecurity Engineering Manager (IT/ Central/ Attractive B — CAREERALLY PTE. LTD.
-  · Technical Delivery Manager(Data Lakehouse ) — OPTIMUM SOLUTIONS (SINGAPORE) 
-  · Technical Project Manager I — JPMORGAN CHASE BANK, N.A.
-  · Project Manager - AI — IKAS INTERNATIONAL (ASIA) PTE.
-  · Project Manager (On-Prem Cloud) — STAR CAREER CONSULTING PTE. LT
-  · IT Project Manager (SDLC / Agile) — SCIENTEC CONSULTING PTE. LTD.
-  · IT Project Manager - #1601 — JOBSTER PRIVATE LTD.
-  · Project Manager — KOH BROTHERS BUILDING & CIVIL 
-  · Project Manager #72107 — ANRADUS PTE. LTD.
-  · Project Manager — SING YIET CIVIL ENGINEERING CO
-  · Project Manager #77824 — ANRADUS PTE. LTD.
-  · Project Manager (Regulatory) — PE PHARMA PTE. LTD.
-  · Project Manager — MCC ENGINEERING (SINGAPORE) PT
-  · Project Manager — CHINA COMMUNICATIONS CONSTRUCT
-  …另有 13 条
+★ 新职位 9 条
+  · Project Manager — T-STAR (PTE. LTD.)
+  · PROJECT MANAGER — MUTIARA (FE) PTE. LTD.
+  · PROJECT MANAGER — MGR UNIVERSAL PTE. LTD.
+  · Senior Project Manager — ARCHER RECRUITMENT PTE. LTD.
+  · Senior Project Manager — YU GYO ENGINEERING & TRADING P
+  · Senior Project Manager — KELINGTON ENGINEERING (S) PTE.
+  · Assistant Project Manager — SING YIET CIVIL ENGINEERING CO
+  · Assistant Project Manager — KWAN YONG CONSTRUCTION PTE LTD
+  · Programme Manager, Precision Engineering ( Changi ) — NEXBRIDGE RECRUITMENT PTE. LTD
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
