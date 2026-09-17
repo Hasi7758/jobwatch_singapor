@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1161 条
+  拿到 1160 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -11,7 +11,7 @@
   [OK] ByteDance (smartrecruiters)
   [OK] Micron (workday)
   [OK] GlobalFoundries (workday)
-  [OK] Applied Materials (workday)
+  [失败] Applied Materials (workday): JSONDecodeError Expecting value: line 1 column 1 (char 0)
   [OK] Medtronic (workday)
   [OK] EssilorLuxottica (smartrecruiters)
   [OK] Continental (smartrecruiters)
@@ -30,27 +30,27 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 4102 条
+  拿到 4028 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 682 / 5263 条符合关键词+地点
+过滤后 648 / 5188 条符合关键词+地点
 
-★ 新职位 28 条
-  · Engineering Manager (Power Generation) — RECRUITPEDIA PTE. LTD.
-  · Senior IT Delivery Manager (AI/Automation) - #1611 — JOBSTER PRIVATE LTD.
-  · IT Project Manager — THE EDGE CONTRACTING SERVICES 
-  · IT Project Manager *Exp in Govt Projects (AMK) — MAESTRO HUMAN RESOURCE PTE. LT
-  · Project Manager — ENCORA TECHNOLOGIES PTE. LTD.
-  · Project Manager — SILVERLINK TECHNOLOGIES PTE. L
-  · Project Manager — ELION SOLUTIONS PTE. LTD.
-  · Project Manager — O2 NETWORK PTE. LTD.
-  · Project Manager — O2 NETWORK PTE. LTD.
-  · Project Manager — O2 NETWORK PTE. LTD.
-  · Project Manager — ONESYSTEMS TECHNOLOGIES PTE. L
-  · Project Manager — ONESYSTEMS TECHNOLOGIES PTE. L
-  · Project Manager — ONESYSTEMS TECHNOLOGIES PTE. L
-  · Project Manager — ACROMEC ENGINEERS PTE LTD
-  · Senior Project Manager — G-TECH METAL PTE. LTD.
-  …另有 13 条
+★ 新职位 32 条
+  · Engineering Manager — GOLDTECH RESOURCES PTE LTD
+  · Engineering Manager (Semiconductor Equipment Design) — GMP TECHNOLOGIES (S) PTE LTD
+  · Senior Technical Program Manager (AI Infrastructure Deployme — ALLEGIS GROUP SINGAPORE PRIVAT
+  · Delivery Manager — RAPSYS TECHNOLOGIES PTE. LTD.
+  · Service Delivery Manager – Network Managed Services — GOLDTECH RESOURCES PTE LTD
+  · *GOV* IT Project Manager — SCIENTEC CONSULTING PTE. LTD.
+  · -NEW- Perm Technical Project Manager (Manufacturing, Cables) — AMBITION GROUP SINGAPORE PTE. 
+  · -NEW- Perm Technical Project Manager (Manufacturing) — AMBITION GROUP SINGAPORE PTE. 
+  · Project Manager — DIRECT SEARCH ASIA PTE. LTD.
+  · MSAT Project Manager — LONZA BIOSCIENCE SINGAPORE PTE
+  · Project Manager — RAPSYS TECHNOLOGIES PTE. LTD.
+  · Project Manager — OVIVO SINGAPORE PTE. LTD.
+  · Project Manager — JJOBB LLP
+  · Project Manager — TRINITY CONSULTING SERVICES PT
+  · Project Manager (EduTech) — EXPLICO PTE. LTD.
+  …另有 17 条
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
