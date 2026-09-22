@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1103 条
+  拿到 1126 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -30,23 +30,27 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 4113 条
+  拿到 4226 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 651 / 5216 条符合关键词+地点
+过滤后 660 / 5352 条符合关键词+地点
 
-★ 新职位 12 条
-  · Project Manager (Residential / Hotel Projects) — INTUIT RECRUITMENT PTE. LTD.
-  · Senior Project Manager — TALENTREQ PARTNERS (PTE. LTD.)
-  · Senior Project Manager — RAPSYS TECHNOLOGIES PTE. LTD.
-  · Assistant Project Manager — RAYMOND CONSTRUCTION PTE LTD
-  · Project Manager (Interior / A&A) #82774 — ANRADUS PTE. LTD.
-  · Assistant Project Manager — MCI CAREER  SERVICES PTE. LTD.
-  · Senior Engineer / Assistant Project Manager — WINMAX INTEGRATED PTE. LTD.
-  · Project Manager – Interior Design, Construction & Site Opera — THE SUPREME HR ADVISORY PTE. L
-  · Program Manager | Precision Engineering — NEXBRIDGE RECRUITMENT PTE. LTD
-  · Product Manager #10298 — ANRADUS PTE. LTD.
-  · Senior / Lead Product Manager (Data Programme) — GovTech Singapore
-  ·  Senior/ Lead Product Manager - Government on Commercial Clo — GovTech Singapore
+★ 新职位 32 条
+  · Cybersecurity Engineering Manager (MNC / High Bonuses) — CAREERALLY PTE. LTD.
+  · 26989949 Applications Development Manager (Payment Technolog — CITIBANK N.A.
+  · Servicenow Delivery Manager — VUI SYSTEMS PTE. LTD.
+  · Technical Delivery Manager (Python/Django) — OPTIMUM SOLUTIONS (SINGAPORE) 
+  · Technical Project Manager (NPI) — ICHOR SYSTEMS SINGAPORE PTE. L
+  · Project Manager (Cloud) — STAR CAREER CONSULTING PTE. LT
+  · IT Project Manager (Contract) — GMP TECHNOLOGIES (S) PTE LTD
+  · Project Manager (On-Prem Cloud) — STAR CAREER CONSULTING PTE. LT
+  · IT Project Manager (Application and Software) #IFL — RECRUIT EXPRESS PTE LTD
+  · Senior IT Project Manager (System Development) — OPUS IT SERVICES PTE LTD
+  · ENGINEERING SERVICES PROJECT MANAGER (EXCLUDING TRANSPORT) — RMR INTERNATIONAL PRIVATE LIMI
+  · PROJECT MANAGER — HPC BUILDERS PTE. LTD.
+  · Project Manager — GLOBALWIDE INTERNATIONAL PTE. 
+  · Project Manager — SHUN YI CHENG CONTRACT ENGINEE
+  · Project Manager — MET ENGINEERING SERVICES PTE L
+  …另有 17 条
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
