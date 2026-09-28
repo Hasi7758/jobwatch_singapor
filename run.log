@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1116 条
+  拿到 1087 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -30,16 +30,17 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 4138 条
+  拿到 4154 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 654 / 5254 条符合关键词+地点
+过滤后 642 / 5241 条符合关键词+地点
 
-★ 新职位 5 条
-  · ENGINEERING MANAGER — SFT ENGINEERING PTE. LTD.
-  · Project Manager — HONFON (SOUTH PACIFIC) ENGINEE
-  · Project Manager — LN ART ID STUDIO PTE. LTD.
-  · Project Manager — CHENG YI PTE. LTD.
-  · Project Manager (LTA Infrastructure Project) — ACHIEVE CAREER CONSULTANT PTE 
+★ 新职位 6 条
+  · Cybersecurity Engineering Manager (MNC / High Bonuses) — CAREERALLY PTE. LTD.
+  · Project Manager (Cloud) — STAR CAREER CONSULTING PTE. LT
+  · Project Manager (On-Prem Cloud) — STAR CAREER CONSULTING PTE. LT
+  · Assistant Project Manager — SWIA PTE. LTD.
+  · Assistant/ Project Manager (Building Projects/ Construction) — INTUIT RECRUITMENT PTE. LTD.
+  · Senior Project Manager (CAG / LTA) — EA RECRUITMENT PTE. LTD.
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
