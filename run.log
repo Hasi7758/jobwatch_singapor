@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1134 条
+  拿到 1048 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -30,17 +30,14 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 4085 条
+  拿到 4095 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 674 / 5219 条符合关键词+地点
+过滤后 630 / 5143 条符合关键词+地点
 
-★ 新职位 6 条
-  · Senior Project Manager — ALS LOGISTIC SOLUTIONS PTE. LT
-  · PROJECT MANAGER — GREEN OCEAN MARINE & ENGINEERI
-  · PROJECT MANAGER — GREEN OCEAN MARINE & ENGINEERI
-  · PROJECT MANAGER — Permanent — JJOBB LLP
-  · Project Manager (LTA Infrastructure Project) — ACHIEVE CAREER CONSULTANT PTE 
-  · PRODUCT MANAGER — HELIUS TECHNOLOGIES PTE. LTD.
+★ 新职位 3 条
+  · Project Manager — MAVENTREE TECHNOLOGY PTE. LTD.
+  · Project Manager (Interior Design) — BAYES RECRUITMENT PTE. LTD.
+  · Senior Staff Test Engineering Lead — AMD
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
