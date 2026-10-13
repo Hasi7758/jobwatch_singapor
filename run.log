@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1048 条
+  拿到 1135 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -30,14 +30,27 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 4095 条
+  拿到 4094 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 630 / 5143 条符合关键词+地点
+过滤后 667 / 5229 条符合关键词+地点
 
-★ 新职位 3 条
-  · Project Manager — MAVENTREE TECHNOLOGY PTE. LTD.
-  · Project Manager (Interior Design) — BAYES RECRUITMENT PTE. LTD.
-  · Senior Staff Test Engineering Lead — AMD
+★ 新职位 36 条
+  · Engineering Manager — IKAS INTERNATIONAL (ASIA) PTE.
+  · Engineering Manager — FOCAL SEARCH PTE. LTD.
+  · Construction Engineering Manager [SL] — WECRUIT PTE. LTD.
+  · Engineering Manager Construction-5 Days [SL] — WECRUIT PTE. LTD.
+  · Construction Engineering Manager-5 Days [SL] — WECRUIT PTE. LTD.
+  · Construction Engineering Manager-Site Office [SL] — WECRUIT PTE. LTD.
+  · IT Project Manager — APBA TG HUMAN RESOURCE PTE. LT
+  · Ai Project Manager — OPTIMUM SOLUTIONS (SINGAPORE) 
+  · PROJECT MANAGER — WEE SENG MARINE & ENGINEERING 
+  · PROJECT MANAGER — YANGTZE MARINE ENGINEERING PTE
+  · PROJECT MANAGER — WEE SENG MARINE PTE. LTD.
+  · PROJECT MANAGER — WEE SENG MARINE PTE. LTD.
+  · PROJECT MANAGER — WEE SENG MARINE & ENGINEERING 
+  · PROJECT MANAGER — WEE SENG MARINE & ENGINEERING 
+  · Project Manager - Government Procurement — WEBSPARKS PTE. LTD.
+  …另有 21 条
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
