@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1075 条
+  拿到 1090 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -9,15 +9,15 @@
   [OK] Thoughtworks (greenhouse)
   [OK] Xendit (greenhouse)
   [OK] ByteDance (smartrecruiters)
-  [OK] Micron (workday)
-  [OK] GlobalFoundries (workday)
-  [OK] Applied Materials (workday)
-  [OK] Medtronic (workday)
+  [失败] Micron (workday): HTTPError 521 Server Error: <none> for url: https://micron.wd1.myworkdayjobs.com/wday/cxs/micron/External/jobs
+  [失败] GlobalFoundries (workday): HTTPError 521 Server Error: <none> for url: https://globalfoundries.wd1.myworkdayjobs.com/wday/cxs/globalfoundries/External/jobs
+  [失败] Applied Materials (workday): HTTPError 521 Server Error: <none> for url: https://amat.wd1.myworkdayjobs.com/wday/cxs/amat/External/jobs
+  [失败] Medtronic (workday): HTTPError 521 Server Error: <none> for url: https://medtronic.wd1.myworkdayjobs.com/wday/cxs/medtronic/MedtronicCareers/jobs
   [OK] EssilorLuxottica (smartrecruiters)
   [OK] Continental (smartrecruiters)
   [OK] SHEIN (greenhouse)
   [OK] GitLab (greenhouse)
-  [OK] KLA (workday)
+  [失败] KLA (workday): HTTPError 521 Server Error: <none> for url: https://kla.wd1.myworkdayjobs.com/wday/cxs/kla/Search/jobs
   [OK] Western Digital (smartrecruiters)
   [OK] Carl Zeiss (lever)
   [OK] Rolls-Royce (workday)
@@ -30,27 +30,27 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 4128 条
+  拿到 2937 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 621 / 5203 条符合关键词+地点
+过滤后 586 / 4027 条符合关键词+地点
 
-★ 新职位 22 条
-  · Engineering Manager — IKAS INTERNATIONAL (ASIA) PTE.
-  · *GOV* IT Project Manager — SCIENTEC CONSULTING PTE. LTD.
-  · IT Project Manager – Application Development & Maintenance — OPTIMUM SOLUTIONS (SINGAPORE) 
-  · IT Project Manager *Exp in Govt Projects (AMK) — MAESTRO HUMAN RESOURCE PTE. LT
-  · IT Project Manager / PMO — NICOLL CURTIN TECHNOLOGY PTE. 
-  · Workstream Project Manager — NOVEL SUNKRIS BUSINESS SOLUTIO
-  · Project Manager — FOCAL SEARCH PTE. LTD.
-  · Project Manager — HELLOAPP PTE. LTD.
-  · Project Manager — LINCOTRADE & ASSOCIATES PTE LT
-  · Project Manager (Contract) — 3 CUBED BUSINESS CONSULTING PT
-  · Project Manager #72107 — ANRADUS PTE. LTD.
-  · Project Manager — THIAN SUNG CONSTRUCTION PTE. L
-  · PROJECT MANAGER / SENIOR PROJECT MANAGER — HONSEI BUILDER PTE. LTD.
-  · Project Manager — H P CONSTRUCTION & ENGINEERING
-  · Project Manager [SL] — WECRUIT PTE. LTD.
-  …另有 7 条
+★ 新职位 26 条
+  · Engineering Manager — GOLDTECH RESOURCES PTE LTD
+  · Regional Engineering Manager [Pro Audio/ AV]_APAC+China_$11. — SEARCH INDEX PTE. LTD.
+  · Application Development Manager (Appian BPM, Oracle, JBoss A — EVYONIC SOLUTIONS PTE. LTD.
+  · Application Development Manager (Appian BPM, Oracle, JBoss A — EVYONIC SOLUTIONS PTE. LTD.
+  · Technical Delivery Manager (Perm) — GMP TECHNOLOGIES (S) PTE LTD
+  · Service Delivery Manager – Network Managed Services — GOLDTECH RESOURCES PTE LTD
+  · IT Assistant Service Delivery Manager — TALENTSIS PTE. LTD.
+  · Service Delivery Manager - HPC Managed Services (up to $9,50 — TYSON JAY MANAGEMENT PTE. LTD.
+  · Lead Technical Project Manager – AI Initiatives & Governance — OPTIMUM SOLUTIONS (SINGAPORE) 
+  · IT Project Manager (Data Science) — BASE CAMP DIGITAL PTE. LTD.
+  · AI Project Manager — AGILEALGO PTE. LTD.
+  · PROJECT MANAGER — X EMPIRE ENGINEERING & CONSTRU
+  · PROJECT MANAGER — DINBUILD CONSTRUCTION PTE. LTD
+  · Project Manager — PRIME BUILD CONSTRUCTION PTE. 
+  · Project Manager — KAJIMA OVERSEAS ASIA (SINGAPOR
+  …另有 11 条
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
