@@ -1,8 +1,8 @@
 抓取 MyCareersFuture…
-  拿到 1078 条
+  拿到 1083 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
-  [失败] Ninja Van (lever): ReadTimeout HTTPSConnectionPool(host='api.lever.co', port=443): Read timed out. (read timeout=20)
+  [OK] Ninja Van (lever)
   [OK] Nium (lever)
   [OK] Grab (smartrecruiters)
   [OK] Stripe (greenhouse)
@@ -12,12 +12,12 @@
   [失败] Micron (workday): HTTPError 429 Client Error: Too Many Requests for url: https://micron.wd1.myworkdayjobs.com/wday/cxs/micron/External/jobs
   [失败] GlobalFoundries (workday): HTTPError 429 Client Error: Too Many Requests for url: https://globalfoundries.wd1.myworkdayjobs.com/wday/cxs/globalfoundries/External/jobs
   [失败] Applied Materials (workday): HTTPError 429 Client Error: Too Many Requests for url: https://amat.wd1.myworkdayjobs.com/wday/cxs/amat/External/jobs
-  [OK] Medtronic (workday)
+  [失败] Medtronic (workday): HTTPError 429 Client Error: Too Many Requests for url: https://medtronic.wd1.myworkdayjobs.com/wday/cxs/medtronic/MedtronicCareers/jobs
   [OK] EssilorLuxottica (smartrecruiters)
   [OK] Continental (smartrecruiters)
   [OK] SHEIN (greenhouse)
   [OK] GitLab (greenhouse)
-  [OK] KLA (workday)
+  [失败] KLA (workday): HTTPError 429 Client Error: Too Many Requests for url: https://kla.wd1.myworkdayjobs.com/wday/cxs/kla/Search/jobs
   [OK] Western Digital (smartrecruiters)
   [OK] Carl Zeiss (lever)
   [失败] Rolls-Royce (workday): HTTPError 429 Client Error: Too Many Requests for url: https://rollsroyce.wd3.myworkdayjobs.com/wday/cxs/rollsroyce/Professional/jobs
@@ -30,27 +30,27 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 2926 条
+  拿到 2868 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 574 / 4004 条符合关键词+地点
+过滤后 567 / 3951 条符合关键词+地点
 
-★ 新职位 21 条
-  · Engineering Manager — IKAS INTERNATIONAL (ASIA) PTE.
-  · Engineering Manager (Semiconductor Design) — GMP TECHNOLOGIES (S) PTE LTD
-  · Cybersecurity Engineering Manager (IT/ Central/ Attractive B — CAREERALLY PTE. LTD.
-  · Research and Development Manager — GLUCORAY PTE. LTD.
-  · Technical Delivery Manager (JD#11464) — SCIENTE INTERNATIONAL PTE. LTD
-  · Project Manager — EASTERN PRETECH PTE LTD
-  · Project Manager — NYLECT ENGINEERING PTE LTD
-  · PROJECT MANAGER — WSG ENGINEERING PTE. LTD.
-  · Project Manager — CAREER TREND PTE. LTD.
-  · Principal Project Manager (DSAD) — Skills and Workforce Developme
-  · Assistant Project Manager — CBRE GWS PTE. LTD.
-  · Project Manager — KOH BROTHERS BUILDING & CIVIL 
-  · ASSISTANT PROJECT MANAGER (PLUMBING & SANITARY) — WSG ENGINEERING PTE. LTD.
-  · Project Manager (Interior Fit-Outs) (Project: Luxury Hospita — ACHIEVE CAREER CONSULTANT PTE 
-  · IT Product Manager (Government) — STAR CAREER CONSULTING PTE. LT
-  …另有 6 条
+★ 新职位 30 条
+  · EIT Engineering Manager / Assistant Manager (Offshore & Mari — GOLDTECH RESOURCES PTE LTD
+  · Senior Engineering Manager - Battery Systems — CYGNIFY PTE. LTD.
+  · Technical Delivery Manager - Data Lake — OPTIMUM SOLUTIONS (SINGAPORE) 
+  · Technical Delivery Manager - Data Governance — 3 CUBED BUSINESS CONSULTING PT
+  · Technical Delivery Manager - Agency contract (PV) — PERSOL SINGAPORE PTE. LTD.
+  · Technical Project Manager — MICHAEL PAGE (PERSONNEL) PTE. 
+  · Technical Project Manager — AAC TECHNOLOGIES PTE. LTD.
+  · Technical Project Manager (JD#11469) — SCIENTE INTERNATIONAL PTE. LTD
+  · Cloud Project Manager — CLOUD KINETICS CONSULTING PTE.
+  · PROJECT MANAGER — TEX-STAR ENGINEERING PTE LTD
+  · PROJECT MANAGER — LLQ EXPRESS PTE. LTD.
+  · Project Manager — DYNAMIC COMMUNICATION PTE. LTD
+  · Project Manager — GENTECH SGP TECHNOLOGY PTE. LT
+  · Project Manager — PING PROJECT PRIVATE LIMITED
+  · Project Manager — DESHIN ENGINEERING & CONSTRUCT
+  …另有 15 条
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
