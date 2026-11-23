@@ -1,5 +1,5 @@
 抓取 MyCareersFuture…
-  拿到 1070 条
+  拿到 1054 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
@@ -15,7 +15,7 @@
   [失败] Medtronic (workday): HTTPError 429 Client Error: Too Many Requests for url: https://medtronic.wd1.myworkdayjobs.com/wday/cxs/medtronic/MedtronicCareers/jobs
   [OK] EssilorLuxottica (smartrecruiters)
   [OK] Continental (smartrecruiters)
-  [OK] SHEIN (greenhouse)
+  [失败] SHEIN (greenhouse): HTTPError 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/shein/jobs?content=true
   [OK] GitLab (greenhouse)
   [失败] KLA (workday): HTTPError 429 Client Error: Too Many Requests for url: https://kla.wd1.myworkdayjobs.com/wday/cxs/kla/Search/jobs
   [OK] Western Digital (smartrecruiters)
@@ -30,14 +30,17 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 2868 条
+  拿到 2854 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 565 / 3938 条符合关键词+地点
+过滤后 560 / 3908 条符合关键词+地点
 
-★ 新职位 3 条
-  · Project Manager  - #1818 — JOBSTER PRIVATE LTD.
-  · Consultant Project Manager — ACHIEVE CAREER CONSULTANT PTE 
-  · Project Manager – HDB / Building Projects — ACHIEVE CAREER CONSULTANT PTE 
+★ 新职位 6 条
+  · project manager — GLOBAL SPORTS BROADCAST SERVIC
+  · Project Manager — JUST FIX PTE. LTD.
+  · Senior Project Manager — G-TECH METAL PTE. LTD.
+  · Project Manager - Contract (Screening Technology / Project P — EA RECRUITMENT PTE. LTD.
+  · Associate Project Manager (Regional) — MOWIN DIGITAL HOLDINGS PTE. LT
+  · Assistant/ Project Manager (Building Projects/ Construction) — INTUIT RECRUITMENT PTE. LTD.
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
