@@ -1,12 +1,12 @@
 抓取 MyCareersFuture…
-  拿到 1095 条
+  拿到 1104 条
 抓取公司 ATS…
   [OK] GovTech Singapore (greenhouse)
   [OK] Ninja Van (lever)
   [OK] Nium (lever)
   [OK] Grab (smartrecruiters)
   [OK] Stripe (greenhouse)
-  [OK] Thoughtworks (greenhouse)
+  [失败] Thoughtworks (greenhouse): HTTPError 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/thoughtworks/jobs?content=true
   [OK] Xendit (greenhouse)
   [OK] ByteDance (smartrecruiters)
   [失败] Micron (workday): HTTPError 429 Client Error: Too Many Requests for url: https://micron.wd1.myworkdayjobs.com/wday/cxs/micron/External/jobs
@@ -30,27 +30,27 @@
   [OK] Schaeffler (successfactors)
   [OK] Bayer (successfactors)
   [OK] ZF (successfactors)
-  拿到 2853 条
+  拿到 2823 条
 丢弃过期职位 1 条(发布超过 365 天)
 
-过滤后 571 / 3948 条符合关键词+地点
+过滤后 575 / 3927 条符合关键词+地点
 
-★ 新职位 21 条
-  · Mechanical Engineering Manager — NXERA SG PTE. LTD.
-  · Electrical Engineering Manager — NXERA SG PTE. LTD.
-  · Technical Delivery Manager (Perm) — GMP TECHNOLOGIES (S) PTE LTD
-  · Project Manager Information Technology - Contract Role — QUESS SELECTION & SERVICES PTE
-  · Technical Project Manager (OutSystems & Cloud Infrastructure — RAPSYS TECHNOLOGIES PTE. LTD.
-  · M46 - Project Manager — FPT ASIA PACIFIC PTE. LTD.
-  · Project Manager — STI ADVANCE (S) PTE. LTD.
-  · Project Manager — GLOBALWIDE INTERNATIONAL PTE. 
-  · Project Manager — JENDA E&C PTE. LTD.
-  · Project Manager — ANDERCO PTE. LTD.
-  · Project Manager — SUNTEC CONSTRUCTION ENGINEERIN
-  · Project Manager [5 DAYS / KAKI BUKIT] (KCKC) — THE SUPREME HR ADVISORY PTE. L
-  · Project Manager — WINNER ENGINEERING PTE LTD
-  · Assistant Project Manager — WINNER ENGINEERING PTE LTD
-  · Project Manager (Screening Technology / 5 Days / Contract) — EA RECRUITMENT PTE. LTD.
-  …另有 6 条
+★ 新职位 22 条
+  · Senior Manager, Product Development Engineering (NPI) — ADVANCED MICRO DEVICES (SINGAP
+  · Cybersecurity Engineering Manager (MNC / High Bonuses) — CAREERALLY PTE. LTD.
+  · Service Delivery Manager - HPC Managed Services (up to $7,50 — TYSON JAY MANAGEMENT PTE. LTD.
+  · Technical Delivery Manager (Java/Microservices) — OPTIMUM SOLUTIONS (SINGAPORE) 
+  · Project Manager - Cloud (Pophealth Record) — SYNAPXE PTE. LTD.
+  · Project Manager (OneService) — MAVENTREE TECHNOLOGY PTE. LTD.
+  · Project Manager - #1832 — JOBSTER PRIVATE LTD.
+  · Project Manager (Consultant) — MAVENTREE TECHNOLOGY PTE. LTD.
+  · Project Manager — TOP ELECTRICAL & ENGINEERING S
+  · Assistant Project Manager — TALENTS@WORK PTE. LTD.
+  · Project Manager (Agency contract) — PERSOL SINGAPORE PTE. LTD.
+  · Project Manager — SING YIET CIVIL ENGINEERING CO
+  · Project Manager (Agency contract) - MB — PERSOL SINGAPORE PTE. LTD.
+  · Assistant Project Manager — RENOWN BUILDERS PTE. LTD.
+  · Assistant Project Manager — SING YIET CIVIL ENGINEERING CO
+  …另有 7 条
 
 报告已生成: /home/runner/work/jobwatch_singapor/jobwatch_singapor/digest.html
